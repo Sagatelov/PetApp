@@ -12,7 +12,7 @@ class PostsModel: Codable {
     var title: String
     var body: String
     
-    init(postEntity: PostEntity) {
+    init(postEntity: PostsEntity) {
         self.userId = Int(postEntity.userId)
         self.id = Int(postEntity.id)
         self.title = postEntity.title ?? ""
