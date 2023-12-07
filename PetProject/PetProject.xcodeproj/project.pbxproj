@@ -10,6 +10,7 @@
 		94055A452B1F745F0025D012 /* CommentsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94055A442B1F745F0025D012 /* CommentsEntity.swift */; };
 		94055A472B1F75610025D012 /* PostsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94055A462B1F75610025D012 /* PostsEntity.swift */; };
 		94055A492B1F75970025D012 /* UsersEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94055A482B1F75970025D012 /* UsersEntity.swift */; };
+		941566A72B21104C0046598B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941566A62B21104C0046598B /* NetworkService.swift */; };
 		941EC7D92B1F85D500A05F4E /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941EC7D82B1F85D500A05F4E /* CoreDataStorage.swift */; };
 		941EC7DB2B1FB24B00A05F4E /* MainFlowNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941EC7DA2B1FB24B00A05F4E /* MainFlowNavigator.swift */; };
 		941EC7E02B20CBF700A05F4E /* UsersFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941EC7DF2B20CBF700A05F4E /* UsersFlowCoordinator.swift */; };
@@ -50,6 +51,7 @@
 		94055A442B1F745F0025D012 /* CommentsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsEntity.swift; sourceTree = "<group>"; };
 		94055A462B1F75610025D012 /* PostsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsEntity.swift; sourceTree = "<group>"; };
 		94055A482B1F75970025D012 /* UsersEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersEntity.swift; sourceTree = "<group>"; };
+		941566A62B21104C0046598B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		941EC7D82B1F85D500A05F4E /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		941EC7DA2B1FB24B00A05F4E /* MainFlowNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowNavigator.swift; sourceTree = "<group>"; };
 		941EC7DF2B20CBF700A05F4E /* UsersFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 		9472B6602B1923B500B7620C /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				941566A62B21104C0046598B /* NetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				941EC7E22B20F32900A05F4E /* ScreenBuilder.swift in Sources */,
 				94055A452B1F745F0025D012 /* CommentsEntity.swift in Sources */,
 				941EC7D92B1F85D500A05F4E /* CoreDataStorage.swift in Sources */,
+				941566A72B21104C0046598B /* NetworkService.swift in Sources */,
 				9472B62D2B17DF4900B7620C /* PetProject.xcdatamodeld in Sources */,
 				943ABF4B2B1E5E1C00B5EE1C /* CommentsModel.swift in Sources */,
 				941EC7DB2B1FB24B00A05F4E /* MainFlowNavigator.swift in Sources */,

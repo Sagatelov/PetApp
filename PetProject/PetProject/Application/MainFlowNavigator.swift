@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol InitControllerForFlowNavigatorProtocol{
+protocol InitialVCForFlowNavigatorProtocol{
     func initController() -> ViewController
 }
 
@@ -23,7 +23,7 @@ final class MainFlowNavigator: MainFlowNavigatorProtocol {
     
     private var window: UIWindow
     var tabBar: UITabBarController
-    var navigators: [InitControllerForFlowNavigatorProtocol] = []
+    var navigators: [InitialVCForFlowNavigatorProtocol] = []
     var screenBuilder: ScreenBuilderProtocol
     
     
@@ -33,7 +33,7 @@ final class MainFlowNavigator: MainFlowNavigatorProtocol {
         self.tabBar = UITabBarController()
         self.screenBuilder = ScreenBuilder()
         navigators = [UsersFlowCoordinator()]
-        var controllers = navigators.map { $0.initController() }
+        let controllers = navigators.map { $0.initController() }
         tabBar.viewControllers = controllers
     }
 }
