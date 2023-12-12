@@ -10,5 +10,7 @@ import CoreData
 
 class CommentsEntity: NSManagedObject {
     
+    
+    
 }
 

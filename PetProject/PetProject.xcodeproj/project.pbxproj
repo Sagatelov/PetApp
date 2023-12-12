@@ -103,9 +103,9 @@
 		94055A432B1F742D0025D012 /* Entitites */ = {
 			isa = PBXGroup;
 			children = (
-				94055A442B1F745F0025D012 /* CommentsEntity.swift */,
-				94055A462B1F75610025D012 /* PostsEntity.swift */,
 				94055A482B1F75970025D012 /* UsersEntity.swift */,
+				94055A462B1F75610025D012 /* PostsEntity.swift */,
+				94055A442B1F745F0025D012 /* CommentsEntity.swift */,
 			);
 			path = Entitites;
 			sourceTree = "<group>";

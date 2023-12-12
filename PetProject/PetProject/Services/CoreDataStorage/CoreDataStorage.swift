@@ -39,6 +39,5 @@ import CoreData
         }
     }
      
-     private init () {
-     }
+     private init () { }
 }
