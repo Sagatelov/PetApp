@@ -6,17 +6,21 @@
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="postId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PostsEntity" inverseName="comments" inverseEntity="PostsEntity"/>
     </entity>
     <entity name="PostsEntity" representedClassName=".PostsEntity" syncable="YES" codeGenerationType="category">
         <attribute name="body" optional="YES" attributeType="String"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="userId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CommentsEntity" inverseName="post" inverseEntity="CommentsEntity"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UsersEntity" inverseName="posts" inverseEntity="UsersEntity"/>
     </entity>
     <entity name="UsersEntity" representedClassName=".UsersEntity" syncable="YES" codeGenerationType="category">
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="username" optional="YES" attributeType="String"/>
+        <relationship name="posts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PostsEntity" inverseName="user" inverseEntity="PostsEntity"/>
     </entity>
 </model>
