@@ -8,10 +8,9 @@
 import Foundation
 import CoreData
 
-class PostsEntity: NSManagedObject, FindEntities {
+final class PostsEntity: NSManagedObject, FindEntities {
     
-    
-    static func getAllPostsEntities(context: NSManagedObjectContext) throws -> [PostsEntity] {
+    static func fetchPostsEntities(context: NSManagedObjectContext) throws -> [PostsEntity] {
         
         let recuest = PostsEntity.fetchRequest()
         

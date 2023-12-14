@@ -8,9 +8,9 @@
 import Foundation
 import CoreData
 
-class CommentsEntity: NSManagedObject, FindEntities {
+final class CommentsEntity: NSManagedObject, FindEntities {
     
-    static func getAllCommentsEntity(context: NSManagedObjectContext) throws -> [CommentsEntity] {
+    static func fetchCommentsEntity(context: NSManagedObjectContext) throws -> [CommentsEntity] {
         
         let request = CommentsEntity.fetchRequest()
         
@@ -29,8 +29,8 @@ class CommentsEntity: NSManagedObject, FindEntities {
         
         do {
             if let findCommentsEntity = try CommentsEntity.findEntity(byId: comments.id,
-                                                                  context: context,
-                                                                  recuest: recuest) {
+                                                                      context: context,
+                                                                      recuest: recuest) {
                 return findCommentsEntity
                 
             } else {
@@ -49,11 +49,11 @@ class CommentsEntity: NSManagedObject, FindEntities {
                     return createComment
                 }
             }
-        
+            
         } catch {
             throw error
         }
-    
+        
         return nil
     }
     

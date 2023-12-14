@@ -11,12 +11,12 @@ import CoreData
 //MARK: - check if the entities allready exist
 
 protocol FindEntities {
-    static func findEntity<T>(byId: Int, context: NSManagedObjectContext, recuest: NSFetchRequest<T>) throws -> T?
+    static func findEntity<EntityName>(byId: Int, context: NSManagedObjectContext, recuest: NSFetchRequest<EntityName>) throws -> EntityName?
 }
 
 extension FindEntities {
     
-    static func findEntity<T>(byId: Int, context: NSManagedObjectContext, recuest: NSFetchRequest<T>) throws -> T? {
+    static func findEntity<EntityName>(byId: Int, context: NSManagedObjectContext, recuest: NSFetchRequest<EntityName>) throws -> EntityName? {
         
         recuest.predicate = NSPredicate(format: "id == %d", byId)
         
