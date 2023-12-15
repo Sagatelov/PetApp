@@ -11,7 +11,6 @@ import CoreData
 final class UsersEntity: NSManagedObject, FindEntities {
     
     static func fetchUserEntities(context: NSManagedObjectContext) throws -> [UsersEntity] {
-        
         let recuest = UsersEntity.fetchRequest()
         
         do {

@@ -21,10 +21,10 @@ extension FindEntities {
         recuest.predicate = NSPredicate(format: "id == %d", byId)
         
         do {
-            let fetchUser = try context.fetch(recuest)
-            if fetchUser.count > 0 {
-                assert(fetchUser.count == 1, "Dublicate has been found in DB!")
-                return fetchUser[0]
+            let fetch = try context.fetch(recuest)
+            if fetch.count > 0 {
+                assert(fetch.count == 1, "Dublicate has been found in DB!")
+                return fetch[0]
             }
         } catch {
             throw error

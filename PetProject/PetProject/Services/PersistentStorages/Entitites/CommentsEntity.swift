@@ -10,12 +10,12 @@ import CoreData
 
 final class CommentsEntity: NSManagedObject, FindEntities {
     
-    static func fetchCommentsEntity(context: NSManagedObjectContext) throws -> [CommentsEntity] {
-        
-        let request = CommentsEntity.fetchRequest()
+    static func fetchCommentsBy(postId: Int, context: NSManagedObjectContext) throws -> [CommentsEntity] {
+        let recuest = CommentsEntity.fetchRequest()
+        recuest.predicate = NSPredicate(format: "postId = %d", postId)
         
         do {
-            let fetchComments = try context.fetch(request)
+            let fetchComments = try context.fetch(recuest)
             return fetchComments
         } catch {
             throw error
@@ -23,7 +23,7 @@ final class CommentsEntity: NSManagedObject, FindEntities {
     }
     
     
-    static func findeOrCreate(comments: CommentsModel, context: NSManagedObjectContext) throws -> CommentsEntity? {
+    static func findOrCreate(comments: CommentsModel, context: NSManagedObjectContext) throws -> CommentsEntity? {
         
         let recuest = CommentsEntity.fetchRequest()
         

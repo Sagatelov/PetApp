@@ -10,13 +10,13 @@ import CoreData
 
 final class PostsEntity: NSManagedObject, FindEntities {
     
-    static func fetchPostsEntities(context: NSManagedObjectContext) throws -> [PostsEntity] {
-        
+    static func fetchPostBy(userId: Int, context: NSManagedObjectContext) throws -> [PostsEntity] {
         let recuest = PostsEntity.fetchRequest()
+        recuest.predicate = NSPredicate(format: "userId = %d", userId)
         
         do {
-            let FetchPosts = try context.fetch(recuest)
-            return FetchPosts
+            let fetchPosts = try context.fetch(recuest)
+            return fetchPosts
         } catch {
             throw error
         }
@@ -35,7 +35,7 @@ final class PostsEntity: NSManagedObject, FindEntities {
                 
             } else {
                 
-                //create PostEntyty only if exist the UserEntity
+                //create PostEntyty only if the UserEntity exist
                 let recuestUserEntity = UsersEntity.fetchRequest()
                 if let userEntity = try UsersEntity.findEntity(byId: post.userId,
                                                                context: context,
