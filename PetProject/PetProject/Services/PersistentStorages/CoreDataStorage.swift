@@ -39,7 +39,7 @@ final class CoreDataStorage {
     
     private init () { }
     
-    // MARK: - save and fetch metod for User
+    // MARK: - save and fetch for User
     
     func getStorageUsers(complitionHandler: @escaping ([UsersModel]) -> Void) {
         
@@ -50,7 +50,7 @@ final class CoreDataStorage {
                 let users = fetchUsersEntities.map {UsersModel(entity: $0)}
                 complitionHandler(users)
             } catch {
-                print("Не удалось загрузить всех Users: \(error)")
+                print("Failed to load all Users: \(error)")
             }
         }
     }
@@ -60,14 +60,47 @@ final class CoreDataStorage {
         context.perform {
             do {
                 for user in users {
-                    _ = try UsersEntity.findeOrCreate(user: user, context: context)
+                    let result = try UsersEntity.findeOrCreate(user: user, context: context)
                 }
                 try context.save()
                 complitonHandler()
             } catch {
-                print("Ошибка сохранения Users в CoreData: \(error)")
+                print("Error saving Users in CoreData: \(error)")
             }
         }
         
     }
+    
+    //MARK: - save and fetch for Posts
+    
+    func getStoragePosts(complitionHandler: @escaping ([PostsModel]) -> Void) {
+        let context = persistentContainer.viewContext
+        context.perform {
+            
+            do {
+                let fetchPostsEntities = try PostsEntity.fetchPostsEntities(context: context)
+                let posts = fetchPostsEntities.map {PostsModel(entity: $0)}
+                complitionHandler(posts)
+            } catch {
+                print("Failed to load all Posts: \(error)")
+            }
+        }
+    }
+    
+    func save(posts: [PostsModel], complitionHandler: @escaping () -> Void) {
+        let contex = persistentContainer.viewContext
+        contex.perform {
+            
+            do {
+                for post in posts {
+                    let result = try PostsEntity.findOrCreate(post: post, context: contex)
+                }
+                try contex.save()
+                complitionHandler()
+            } catch {
+                print("Error saving Posts in CoreData: \(error)")
+            }
+        }
+    }
+    
 }

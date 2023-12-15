@@ -13,10 +13,10 @@ struct PostsModel: Codable {
     var title: String
     var body: String
     
-    init(postEntity: PostsEntity) {
-        self.userId = Int(postEntity.userId)
-        self.id = Int(postEntity.id)
-        self.title = postEntity.title ?? ""
-        self.body = postEntity.body ?? ""
+    init(entity: PostsEntity) {
+        self.userId = Int(entity.userId)
+        self.id = Int(entity.id)
+        self.title = entity.title ?? ""
+        self.body = entity.body ?? ""
     }
 }

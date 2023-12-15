@@ -19,14 +19,14 @@ class DataManeger {
     
     func getAllUsers(complitionHandler: @escaping (Result<[UsersModel], Error>) -> Void) {
         
-        coreData.getStorageUsers { storageUsers in
+        coreData.getStorageUsers { [weak self] storageUsers in
             
             if storageUsers.isEmpty {
-                self.network.getAllUsers { networkUsers in
+                self?.network.getAllUsers { networkUsers in
                     
                     switch networkUsers {
                     case .success(let users):
-                        self.coreData.save(users: users) {
+                        self?.coreData.save(users: users) {
                             complitionHandler(.success(users))}
                         
                     case .failure(let error):
