@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 
-class DataManeger {
+class DataManager {
     
     let network = NetworkService()
     let coreData = CoreDataStorage.sared
@@ -28,7 +28,6 @@ class DataManeger {
                     case .success(let users):
                         self?.coreData.save(users: users) {
                             complitionHandler(.success(users))}
-                        
                     case .failure(let error):
                         complitionHandler(.failure(error))
                     }
@@ -39,5 +38,29 @@ class DataManeger {
             }
         }
     }
+    
+    
+    func getPostsby(userId: Int, complitionHandler: @escaping (Result<[PostsModel], Error>) -> Void) {
+        
+        coreData.getStoragePosts(byUserId: userId) { storagePosts in
+            
+            if storagePosts.isEmpty {
+                self.network.getPostBy(userId: userId) { networkPosts in
+                    
+                    switch networkPosts {
+                    case .success(let posts):
+                        self.coreData.save(posts: posts) {
+                            complitionHandler(.success(posts))}
+                    case .failure(let error):
+                        complitionHandler(.failure(error))
+                    }
+                }
+                
+            } else {
+                complitionHandler(.success(storagePosts))
+            }
+        }
+    }
+    
 }
 

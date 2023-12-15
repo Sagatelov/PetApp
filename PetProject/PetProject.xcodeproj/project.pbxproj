@@ -29,7 +29,7 @@
 		9472B6472B17DF4B00B7620C /* PetProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9472B6462B17DF4B00B7620C /* PetProjectUITests.swift */; };
 		9472B6492B17DF4B00B7620C /* PetProjectUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9472B6482B17DF4B00B7620C /* PetProjectUITestsLaunchTests.swift */; };
 		9472B6642B1B93AA00B7620C /* UsersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9472B6632B1B93AA00B7620C /* UsersModel.swift */; };
-		94A4EE4E2B2B793300ED4F99 /* DataManeger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A4EE4D2B2B793300ED4F99 /* DataManeger.swift */; };
+		94A4EE4E2B2B793300ED4F99 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A4EE4D2B2B793300ED4F99 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +76,7 @@
 		9472B6462B17DF4B00B7620C /* PetProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetProjectUITests.swift; sourceTree = "<group>"; };
 		9472B6482B17DF4B00B7620C /* PetProjectUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetProjectUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9472B6632B1B93AA00B7620C /* UsersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersModel.swift; sourceTree = "<group>"; };
-		94A4EE4D2B2B793300ED4F99 /* DataManeger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManeger.swift; sourceTree = "<group>"; };
+		94A4EE4D2B2B793300ED4F99 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,7 +268,7 @@
 		94A4EE4F2B2B7A3D00ED4F99 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				94A4EE4D2B2B793300ED4F99 /* DataManeger.swift */,
+				94A4EE4D2B2B793300ED4F99 /* DataManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -409,7 +409,7 @@
 				94055A492B1F75970025D012 /* UsersEntity.swift in Sources */,
 				94055A472B1F75610025D012 /* PostsEntity.swift in Sources */,
 				9472B6272B17DF4900B7620C /* ViewController.swift in Sources */,
-				94A4EE4E2B2B793300ED4F99 /* DataManeger.swift in Sources */,
+				94A4EE4E2B2B793300ED4F99 /* DataManager.swift in Sources */,
 				9472B6232B17DF4900B7620C /* AppDelegate.swift in Sources */,
 				9472B6252B17DF4900B7620C /* SceneDelegate.swift in Sources */,
 				941EC7E22B20F32900A05F4E /* ScreenBuilder.swift in Sources */,
