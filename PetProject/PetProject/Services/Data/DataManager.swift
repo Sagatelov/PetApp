@@ -40,7 +40,7 @@ class DataManager {
     }
     
     
-    func getPostsby(userId: Int, complitionHandler: @escaping (Result<[PostsModel], Error>) -> Void) {
+    func getPostsBy(userId: Int, complitionHandler: @escaping (Result<[PostsModel], Error>) -> Void) {
         
         coreData.getStoragePosts(byUserId: userId) { storagePosts in
             
@@ -62,5 +62,27 @@ class DataManager {
         }
     }
     
+    
+    func getCommentsBy(postId: Int, complitionHandler: @escaping (Result<[CommentsModel], Error>) -> Void) {
+        
+        coreData.getStorageComments(byPostsId: postId) { storageComments in
+            
+            if storageComments.isEmpty {
+                self.network.getCommentsBy(postId: postId) { networkComments in
+                    
+                    switch networkComments {
+                    case .success(let posts):
+                        self.coreData.save(comments: posts) {
+                            complitionHandler(.success(posts))}
+                    case .failure(let error):
+                        complitionHandler(.failure(error))
+                    }
+                }
+                
+            } else {
+                complitionHandler(.success(storageComments))
+            }
+        }
+    }
+    
 }
-
