@@ -17,6 +17,7 @@
 		941EC7E22B20F32900A05F4E /* ScreenBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941EC7E12B20F32900A05F4E /* ScreenBuilder.swift */; };
 		943ABF492B1E5E0B00B5EE1C /* PostsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943ABF482B1E5E0B00B5EE1C /* PostsModel.swift */; };
 		943ABF4B2B1E5E1C00B5EE1C /* CommentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943ABF4A2B1E5E1C00B5EE1C /* CommentsModel.swift */; };
+		945B14582B2A297C00C7532E /* HelpersProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945B14572B2A297C00C7532E /* HelpersProtocols.swift */; };
 		9472B6232B17DF4900B7620C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9472B6222B17DF4900B7620C /* AppDelegate.swift */; };
 		9472B6252B17DF4900B7620C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9472B6242B17DF4900B7620C /* SceneDelegate.swift */; };
 		9472B6272B17DF4900B7620C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9472B6262B17DF4900B7620C /* ViewController.swift */; };
@@ -28,6 +29,7 @@
 		9472B6472B17DF4B00B7620C /* PetProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9472B6462B17DF4B00B7620C /* PetProjectUITests.swift */; };
 		9472B6492B17DF4B00B7620C /* PetProjectUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9472B6482B17DF4B00B7620C /* PetProjectUITestsLaunchTests.swift */; };
 		9472B6642B1B93AA00B7620C /* UsersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9472B6632B1B93AA00B7620C /* UsersModel.swift */; };
+		94A4EE4E2B2B793300ED4F99 /* DataManeger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A4EE4D2B2B793300ED4F99 /* DataManeger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,7 @@
 		941EC7E12B20F32900A05F4E /* ScreenBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenBuilder.swift; sourceTree = "<group>"; };
 		943ABF482B1E5E0B00B5EE1C /* PostsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsModel.swift; sourceTree = "<group>"; };
 		943ABF4A2B1E5E1C00B5EE1C /* CommentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsModel.swift; sourceTree = "<group>"; };
+		945B14572B2A297C00C7532E /* HelpersProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpersProtocols.swift; sourceTree = "<group>"; };
 		9472B61F2B17DF4900B7620C /* PetProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9472B6222B17DF4900B7620C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9472B6242B17DF4900B7620C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +76,7 @@
 		9472B6462B17DF4B00B7620C /* PetProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetProjectUITests.swift; sourceTree = "<group>"; };
 		9472B6482B17DF4B00B7620C /* PetProjectUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetProjectUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9472B6632B1B93AA00B7620C /* UsersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersModel.swift; sourceTree = "<group>"; };
+		94A4EE4D2B2B793300ED4F99 /* DataManeger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManeger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,7 @@
 				94055A482B1F75970025D012 /* UsersEntity.swift */,
 				94055A462B1F75610025D012 /* PostsEntity.swift */,
 				94055A442B1F745F0025D012 /* CommentsEntity.swift */,
+				945B14572B2A297C00C7532E /* HelpersProtocols.swift */,
 			);
 			path = Entitites;
 			sourceTree = "<group>";
@@ -235,20 +240,21 @@
 		9472B65D2B1922A400B7620C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				94A4EE4F2B2B7A3D00ED4F99 /* Data */,
 				9472B6602B1923B500B7620C /* Network */,
-				9472B65E2B19230200B7620C /* CoreDataStorage */,
+				9472B65E2B19230200B7620C /* PersistentStorages */,
 			);
 			path = Services;
 			sourceTree = "<group>";
 		};
-		9472B65E2B19230200B7620C /* CoreDataStorage */ = {
+		9472B65E2B19230200B7620C /* PersistentStorages */ = {
 			isa = PBXGroup;
 			children = (
 				941EC7D82B1F85D500A05F4E /* CoreDataStorage.swift */,
 				94055A432B1F742D0025D012 /* Entitites */,
 				9472B62B2B17DF4900B7620C /* PetProject.xcdatamodeld */,
 			);
-			path = CoreDataStorage;
+			path = PersistentStorages;
 			sourceTree = "<group>";
 		};
 		9472B6602B1923B500B7620C /* Network */ = {
@@ -257,6 +263,14 @@
 				941566A62B21104C0046598B /* NetworkService.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		94A4EE4F2B2B7A3D00ED4F99 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				94A4EE4D2B2B793300ED4F99 /* DataManeger.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -395,10 +409,12 @@
 				94055A492B1F75970025D012 /* UsersEntity.swift in Sources */,
 				94055A472B1F75610025D012 /* PostsEntity.swift in Sources */,
 				9472B6272B17DF4900B7620C /* ViewController.swift in Sources */,
+				94A4EE4E2B2B793300ED4F99 /* DataManeger.swift in Sources */,
 				9472B6232B17DF4900B7620C /* AppDelegate.swift in Sources */,
 				9472B6252B17DF4900B7620C /* SceneDelegate.swift in Sources */,
 				941EC7E22B20F32900A05F4E /* ScreenBuilder.swift in Sources */,
 				94055A452B1F745F0025D012 /* CommentsEntity.swift in Sources */,
+				945B14582B2A297C00C7532E /* HelpersProtocols.swift in Sources */,
 				941EC7D92B1F85D500A05F4E /* CoreDataStorage.swift in Sources */,
 				941566A72B21104C0046598B /* NetworkService.swift in Sources */,
 				9472B62D2B17DF4900B7620C /* PetProject.xcdatamodeld in Sources */,
