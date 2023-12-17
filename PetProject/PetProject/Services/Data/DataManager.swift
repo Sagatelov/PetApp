@@ -8,16 +8,20 @@
 import Foundation
 import CoreData
 
+protocol DataManagerProtocol {
+    func getAllUsers(completionHandler: @escaping (Result<[UsersModel], Error>) -> Void)
+    func getPostsBy(userId: Int, completionHandler: @escaping (Result<[PostsModel], Error>) -> Void)
+    func getCommentsBy(postId: Int, completionHandler: @escaping (Result<[CommentsModel], Error>) -> Void)
+}
 
-class DataManager {
+
+class DataManager: DataManagerProtocol {
     
     let network = NetworkService()
     let coreData = CoreDataStorage.sared
     
     
-    
-    
-    func getAllUsers(complitionHandler: @escaping (Result<[UsersModel], Error>) -> Void) {
+    func getAllUsers(completionHandler: @escaping (Result<[UsersModel], Error>) -> Void) {
         
         coreData.getStorageUsers { [weak self] storageUsers in
             
@@ -27,20 +31,20 @@ class DataManager {
                     switch networkUsers {
                     case .success(let users):
                         self?.coreData.save(users: users) {
-                            complitionHandler(.success(users))}
+                            completionHandler(.success(users))}
                     case .failure(let error):
-                        complitionHandler(.failure(error))
+                        completionHandler(.failure(error))
                     }
                 }
                 
             } else {
-                complitionHandler(.success(storageUsers))
+                completionHandler(.success(storageUsers))
             }
         }
     }
     
     
-    func getPostsBy(userId: Int, complitionHandler: @escaping (Result<[PostsModel], Error>) -> Void) {
+    func getPostsBy(userId: Int, completionHandler: @escaping (Result<[PostsModel], Error>) -> Void) {
         
         coreData.getStoragePosts(byUserId: userId) { storagePosts in
             
@@ -50,20 +54,20 @@ class DataManager {
                     switch networkPosts {
                     case .success(let posts):
                         self.coreData.save(posts: posts) {
-                            complitionHandler(.success(posts))}
+                            completionHandler(.success(posts))}
                     case .failure(let error):
-                        complitionHandler(.failure(error))
+                        completionHandler(.failure(error))
                     }
                 }
                 
             } else {
-                complitionHandler(.success(storagePosts))
+                completionHandler(.success(storagePosts))
             }
         }
     }
     
     
-    func getCommentsBy(postId: Int, complitionHandler: @escaping (Result<[CommentsModel], Error>) -> Void) {
+    func getCommentsBy(postId: Int, completionHandler: @escaping (Result<[CommentsModel], Error>) -> Void) {
         
         coreData.getStorageComments(byPostsId: postId) { storageComments in
             
@@ -73,14 +77,14 @@ class DataManager {
                     switch networkComments {
                     case .success(let posts):
                         self.coreData.save(comments: posts) {
-                            complitionHandler(.success(posts))}
+                            completionHandler(.success(posts))}
                     case .failure(let error):
-                        complitionHandler(.failure(error))
+                        completionHandler(.failure(error))
                     }
                 }
                 
             } else {
-                complitionHandler(.success(storageComments))
+                completionHandler(.success(storageComments))
             }
         }
     }

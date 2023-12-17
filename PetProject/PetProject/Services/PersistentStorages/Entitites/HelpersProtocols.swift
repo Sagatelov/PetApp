@@ -11,17 +11,17 @@ import CoreData
 //MARK: - check if the entities allready exist
 
 protocol FindEntities {
-    static func findEntity<EntityName>(byId: Int, context: NSManagedObjectContext, recuest: NSFetchRequest<EntityName>) throws -> EntityName?
+    static func findEntity<EntityName>(byId: Int, context: NSManagedObjectContext, request: NSFetchRequest<EntityName>) throws -> EntityName?
 }
 
 extension FindEntities {
     
-    static func findEntity<EntityName>(byId: Int, context: NSManagedObjectContext, recuest: NSFetchRequest<EntityName>) throws -> EntityName? {
+    static func findEntity<EntityName>(byId: Int, context: NSManagedObjectContext, request: NSFetchRequest<EntityName>) throws -> EntityName? {
         
-        recuest.predicate = NSPredicate(format: "id == %d", byId)
+        request.predicate = NSPredicate(format: "id == %d", byId)
         
         do {
-            let fetch = try context.fetch(recuest)
+            let fetch = try context.fetch(request)
             if fetch.count > 0 {
                 assert(fetch.count == 1, "Dublicate has been found in DB!")
                 return fetch[0]

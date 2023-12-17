@@ -42,14 +42,14 @@ final class CoreDataStorage {
     
     // MARK: - save and fetch for User
     
-    func getStorageUsers(complitionHandler: @escaping ([UsersModel]) -> Void) {
+    func getStorageUsers(completionHandler: @escaping ([UsersModel]) -> Void) {
         
         let context = persistentContainer.viewContext
         context.perform {
             do {
                 let fetchUsersEntities = try UsersEntity.fetchUserEntities(context: context)
                 let users = fetchUsersEntities.map {UsersModel(entity: $0)}
-                complitionHandler(users)
+                completionHandler(users)
             } catch {
                 print("Failed to load all Users: \(error)")
             }
@@ -74,21 +74,21 @@ final class CoreDataStorage {
     
     // MARK: - save and fetch for Posts
     
-    func getStoragePosts(byUserId: Int, complitionHandler: @escaping ([PostsModel]) -> Void) {
+    func getStoragePosts(byUserId: Int, completionHandler: @escaping ([PostsModel]) -> Void) {
         let context = persistentContainer.viewContext
         context.perform {
             
             do {
                 let fetchPostsEntities = try PostsEntity.fetchPostBy(userId: byUserId, context: context)
                 let posts = fetchPostsEntities.map {PostsModel(entity: $0)}
-                complitionHandler(posts)
+                completionHandler(posts)
             } catch {
                 print("Failed to load Posts: \(error)")
             }
         }
     }
     
-    func save(posts: [PostsModel], complitionHandler: @escaping () -> Void) {
+    func save(posts: [PostsModel], completionHandler: @escaping () -> Void) {
         let contex = persistentContainer.viewContext
         contex.perform {
             
@@ -97,7 +97,7 @@ final class CoreDataStorage {
                     let checkPosts = try PostsEntity.findOrCreate(post: post, context: contex)
                 }
                 try contex.save()
-                complitionHandler()
+                completionHandler()
             } catch {
                 print("Error saving Posts in CoreData: \(error)")
             }
@@ -106,13 +106,13 @@ final class CoreDataStorage {
     
     // MARK: - save and fatch for Comments
     
-    func getStorageComments(byPostsId: Int, complitionHandler: @escaping ([CommentsModel]) -> Void) {
+    func getStorageComments(byPostsId: Int, completionHandler: @escaping ([CommentsModel]) -> Void) {
         let context = persistentContainer.viewContext
         context.perform {
             do {
                 let fetchComments = try CommentsEntity.fetchCommentsBy(postId: byPostsId, context: context)
                 let comments = fetchComments.map { CommentsModel(entities: $0) }
-                complitionHandler(comments)
+                completionHandler(comments)
             } catch {
                 print("Failed to load Comments: \(error)")
             }
@@ -120,7 +120,7 @@ final class CoreDataStorage {
     }
     
     
-    func save(comments: [CommentsModel], complitionHandler: @escaping () -> Void) {
+    func save(comments: [CommentsModel], completionHandler: @escaping () -> Void) {
         let context = persistentContainer.viewContext
         context.perform {
             do {
@@ -128,7 +128,7 @@ final class CoreDataStorage {
                     let checkComments = try CommentsEntity.findOrCreate(comments: comment, context: context)
                 }
                 try context.save()
-                complitionHandler()
+                completionHandler()
             } catch {
                 print("Error saving Comments in CoreData: \(error)")
             }

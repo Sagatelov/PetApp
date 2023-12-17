@@ -15,7 +15,6 @@ protocol NetworkServiceProtocol {
 
 class NetworkService {
     
-    
     enum HTTPMetod: String {
         case GET
         case PUT
