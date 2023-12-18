@@ -61,7 +61,7 @@ final class CoreDataStorage {
         context.perform {
             do {
                 for user in users {
-                    let result = try UsersEntity.findeOrCreate(user: user, context: context)
+                    _ = try UsersEntity.findeOrCreate(user: user, context: context)
                 }
                 try context.save()
                 complitonHandler()
@@ -94,7 +94,7 @@ final class CoreDataStorage {
             
             do {
                 for post in posts {
-                    let checkPosts = try PostsEntity.findOrCreate(post: post, context: contex)
+                    _ = try PostsEntity.findOrCreate(post: post, context: contex)
                 }
                 try contex.save()
                 completionHandler()
@@ -125,7 +125,7 @@ final class CoreDataStorage {
         context.perform {
             do {
                 for comment in comments {
-                    let checkComments = try CommentsEntity.findOrCreate(comments: comment, context: context)
+                    _ = try CommentsEntity.findOrCreate(comments: comment, context: context)
                 }
                 try context.save()
                 completionHandler()

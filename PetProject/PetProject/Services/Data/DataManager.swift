@@ -12,14 +12,20 @@ protocol DataManagerProtocol {
     func getAllUsers(completionHandler: @escaping (Result<[UsersModel], Error>) -> Void)
     func getPostsBy(userId: Int, completionHandler: @escaping (Result<[PostsModel], Error>) -> Void)
     func getCommentsBy(postId: Int, completionHandler: @escaping (Result<[CommentsModel], Error>) -> Void)
+    init(network: NetworkService, coreData: CoreDataStorage)
 }
 
 
 class DataManager: DataManagerProtocol {
     
-    let network = NetworkService()
-    let coreData = CoreDataStorage.sared
+    let network: NetworkService
+    let coreData: CoreDataStorage
     
+    required init(network: NetworkService, coreData: CoreDataStorage) {
+        self.network = network
+        self.coreData = coreData
+    }
+
     
     func getAllUsers(completionHandler: @escaping (Result<[UsersModel], Error>) -> Void) {
         

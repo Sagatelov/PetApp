@@ -25,7 +25,7 @@ final class UsersFlowCoordinator {
 
 
 extension UsersFlowCoordinator: InitialVCForFlowNavigatorProtocol {
-    func initController() -> ViewController {
-        return ViewController()
+    func initController() -> UIViewController {
+        return UsersViewController()
     }
 }
