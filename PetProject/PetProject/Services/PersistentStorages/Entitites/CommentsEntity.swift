@@ -10,12 +10,12 @@ import CoreData
 
 final class CommentsEntity: NSManagedObject, FindEntities {
     
-    static func fetchCommentsEntity(context: NSManagedObjectContext) throws -> [CommentsEntity] {
-        
-        let request = CommentsEntity.fetchRequest()
+    static func fetchCommentsBy(postId: Int, context: NSManagedObjectContext) throws -> [CommentsEntity] {
+        let recuest = CommentsEntity.fetchRequest()
+        recuest.predicate = NSPredicate(format: "postId = %d", postId)
         
         do {
-            let fetchComments = try context.fetch(request)
+            let fetchComments = try context.fetch(recuest)
             return fetchComments
         } catch {
             throw error
@@ -23,22 +23,22 @@ final class CommentsEntity: NSManagedObject, FindEntities {
     }
     
     
-    static func findeOrCreate(comments: CommentsModel, context: NSManagedObjectContext) throws -> CommentsEntity? {
+    static func findOrCreate(comments: CommentsModel, context: NSManagedObjectContext) throws -> CommentsEntity? {
         
-        let recuest = CommentsEntity.fetchRequest()
+        let request = CommentsEntity.fetchRequest()
         
         do {
             if let findCommentsEntity = try CommentsEntity.findEntity(byId: comments.id,
                                                                       context: context,
-                                                                      recuest: recuest) {
+                                                                      request: request) {
                 return findCommentsEntity
                 
             } else {
                 
-                let recuestPostsEntity = PostsEntity.fetchRequest()
+                let requestPostsEntity = PostsEntity.fetchRequest()
                 if let postExist = try PostsEntity.findEntity(byId: comments.postId,
                                                               context: context,
-                                                              recuest: recuestPostsEntity) {
+                                                              request: requestPostsEntity) {
                     let createComment = CommentsEntity(context: context)
                     createComment.body = comments.body
                     createComment.email = comments.email

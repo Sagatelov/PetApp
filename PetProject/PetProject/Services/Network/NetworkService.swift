@@ -8,13 +8,12 @@
 import Foundation
 
 protocol NetworkServiceProtocol {
-    func getAllUsers(complitionHandler: @escaping (Result<[UsersModel], Error>) -> Void) -> Void
-    func getPostBy(userId: Int, complitionHandler: @escaping (Result<[PostsModel], Error>) -> Void) -> Void
-    func getCommentsBy(postId: Int, complitionHandler: @escaping (Result<[CommentsModel], Error>) -> Void) -> Void
+    func getAllUsers(completionHandler: @escaping (Result<[UsersModel], Error>) -> Void) -> Void
+    func getPostBy(userId: Int, completionHandler: @escaping (Result<[PostsModel], Error>) -> Void) -> Void
+    func getCommentsBy(postId: Int, completionHandler: @escaping (Result<[CommentsModel], Error>) -> Void) -> Void
 }
 
 class NetworkService {
-    
     
     enum HTTPMetod: String {
         case GET
@@ -37,20 +36,20 @@ extension NetworkService: NetworkServiceProtocol {
     
     //MARK: - get all users from server
     
-    func getAllUsers(complitionHandler: @escaping (Result<[UsersModel], Error>) -> Void) {
+    func getAllUsers(completionHandler: @escaping (Result<[UsersModel], Error>) -> Void) {
         guard let url = URL(string: url + APIs.users.rawValue) else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
-                complitionHandler( .failure(error))
+                completionHandler( .failure(error))
             } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
                 
                 do {
                     let users = try JSONDecoder().decode([UsersModel].self, from: data)
-                    complitionHandler(.success(users))
+                    completionHandler(.success(users))
                     
                 } catch {
-                    complitionHandler(.failure(error))
+                    completionHandler(.failure(error))
                 }
             }
         } .resume()
@@ -59,7 +58,7 @@ extension NetworkService: NetworkServiceProtocol {
     
     //MARK: - get posts by selected user
     
-    func getPostBy(userId: Int, complitionHandler: @escaping (Result<[PostsModel], Error>) -> Void) {
+    func getPostBy(userId: Int, completionHandler: @escaping (Result<[PostsModel], Error>) -> Void) {
         guard let url = URL(string: url + APIs.posts.rawValue) else {return}
         
         var UrlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
@@ -69,15 +68,15 @@ extension NetworkService: NetworkServiceProtocol {
     
         URLSession.shared.dataTask(with: queryUrl) { data, response, error in
             if let error = error {
-                complitionHandler( .failure(error))
+                completionHandler( .failure(error))
             } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
                 
                 do {
                     let posts = try JSONDecoder().decode([PostsModel].self, from: data)
-                    complitionHandler(.success(posts))
+                    completionHandler(.success(posts))
                     
                 } catch {
-                    complitionHandler(.failure(error))
+                    completionHandler(.failure(error))
                 }
             }
         }.resume()
@@ -86,7 +85,7 @@ extension NetworkService: NetworkServiceProtocol {
     
     //MARK: - get comments by selected post
     
-    func getCommentsBy(postId: Int, complitionHandler: @escaping (Result<[CommentsModel], Error>) -> Void) {
+    func getCommentsBy(postId: Int, completionHandler: @escaping (Result<[CommentsModel], Error>) -> Void) {
         guard let url = URL(string: url) else { return }
         
         var urlComponets = URLComponents(url: url, resolvingAgainstBaseURL: false)
@@ -96,14 +95,14 @@ extension NetworkService: NetworkServiceProtocol {
         
         URLSession.shared.dataTask(with: queryUrl) { data, response, error in
             if let error = error{
-                complitionHandler( .failure(error))
+                completionHandler( .failure(error))
             } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
                 
                 do {
                     let comments = try JSONDecoder().decode([CommentsModel].self, from: data)
-                    complitionHandler(.success(comments))
+                    completionHandler(.success(comments))
                 } catch {
-                    complitionHandler(.failure(error))
+                    completionHandler(.failure(error))
                 }
             }
         }.resume()

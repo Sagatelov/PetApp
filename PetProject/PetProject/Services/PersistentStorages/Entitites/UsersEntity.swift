@@ -11,11 +11,10 @@ import CoreData
 final class UsersEntity: NSManagedObject, FindEntities {
     
     static func fetchUserEntities(context: NSManagedObjectContext) throws -> [UsersEntity] {
-        
-        let recuest = UsersEntity.fetchRequest()
+        let rquest = UsersEntity.fetchRequest()
         
         do {
-            let FetchUsers = try context.fetch(recuest)
+            let FetchUsers = try context.fetch(rquest)
             return FetchUsers
         } catch {
             throw error
@@ -25,10 +24,10 @@ final class UsersEntity: NSManagedObject, FindEntities {
     
     static func findeOrCreate(user: UsersModel, context: NSManagedObjectContext) throws -> UsersEntity {
         
-        let recuest = UsersEntity.fetchRequest()
+        let request = UsersEntity.fetchRequest()
         
         do {
-            if let findeUserEntity = try findEntity(byId: user.id, context: context, recuest: recuest) {
+            if let findeUserEntity = try findEntity(byId: user.id, context: context, request: request) {
                 return findeUserEntity
             } else {
                 let createUser = UsersEntity(context: context)
