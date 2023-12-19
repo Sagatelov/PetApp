@@ -10,10 +10,7 @@ import CoreData
 
 //MARK: - check if the entities allready exist
 
-protocol FindEntities {
-    static func findEntity<EntityName>(byId: Int, context: NSManagedObjectContext, request: NSFetchRequest<EntityName>) throws -> EntityName?
-}
-
+protocol FindEntities {}
 extension FindEntities {
     
     static func findEntity<EntityName>(byId: Int, context: NSManagedObjectContext, request: NSFetchRequest<EntityName>) throws -> EntityName? {
