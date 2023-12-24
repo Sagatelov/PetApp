@@ -7,16 +7,20 @@
 
 import Foundation
 
+// MARK: Output
 protocol UsersViewModelOutput {
-    var dataManager: DataManager { get }
-    var flowCordinator: UsersFlowCoordinator { get }
-    var users: [UsersModel]? { get }
+    var dataManager: DataManagerProtocol { get }
+    var flowCoordinator: CoordinatorConfigProtocol { get }
+    var users: Observable<[UsersModel]> { get }
+    var error: Observable<[Error]> { get }
 }
 
-protocol UsersViewModelInpute {
+// MARK: Inpute
+protocol UsersViewModelInput {
     func delete(user: UsersModel)
     func create()
     func edit(user: UsersModel)
+    func didTapToDetailController(_ usersId: UsersModel)
 }
 
 typealias UsersViewModelPorotocol = UsersViewModelInpute & UsersViewModelOutput
