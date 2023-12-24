@@ -24,8 +24,12 @@ final class ScreenBuilder: ScreenBuilderProtocol {
         return UsersViewController()
     }
     
-    func initialUserController() -> UsersViewController {
-        
-        return UsersViewController()
+    func initialUserController(coordinator: CoordinatorConfigProtocol) -> UsersViewController {
+        let network = NetworkService()
+        let coreDataStorage = CoreDataStorage.sared
+        let dataManager = DataManager(network: network, coreData: coreDataStorage)
+        let viewModel = UsersViewModel(dataManager: dataManager, flowCoordinator: coordinator)
+        let usersController = UsersViewController.initUsersList(viewModel: viewModel)
+        return usersController
     }
 }
