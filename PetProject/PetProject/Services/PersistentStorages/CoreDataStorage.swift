@@ -69,7 +69,22 @@ final class CoreDataStorage {
                 print("Error saving Users in CoreData: \(error)")
             }
         }
-        
+    }
+    
+    func update(user: UsersModel, copletionHandler: @escaping (UsersEntity) -> Void) -> Void {
+        let context = persistentContainer.viewContext
+        context.perform {
+            do {
+                if let finded = try UsersEntity.findAndUpdate(entity: UsersEntity.self, id: user.id, context: context) {
+                    if let entity = finded as? UsersEntity {
+                        copletionHandler(entity)
+                    }
+                    try context.save()
+                }
+            } catch {
+                print("Error update Users in CoreData: \(error)")
+            }
+        }
     }
     
     // MARK: - save and fetch for Posts
