@@ -23,20 +23,40 @@ protocol UsersViewModelInput {
     func didTapToDetailController(_ usersId: UsersModel)
 }
 
-typealias UsersViewModelPorotocol = UsersViewModelInpute & UsersViewModelOutput
+typealias UsersViewModelPorotocol = UsersViewModelInput & UsersViewModelOutput
 
-class UsersViewModel: UsersViewModelPorotocol {
+final class UsersViewModel: UsersViewModelPorotocol {
     
-    var users: [UsersModel]?
-    var dataManager: DataManager
-    var flowCordinator: UsersFlowCoordinator
+    var error: Observable<[Error]> = (Observable([]))
+    var users: Observable<[UsersModel]> = (Observable([]))
+    var dataManager: DataManagerProtocol
+    var flowCoordinator: CoordinatorConfigProtocol
     
-    init(dataManager: DataManager, flowCordinator: UsersFlowCoordinator) {
+    init(dataManager: DataManagerProtocol, flowCoordinator: CoordinatorConfigProtocol) {
         self.dataManager = dataManager
-        self.flowCordinator = flowCordinator
+        self.flowCoordinator = flowCoordinator
     }
     
     
+    
+    private func loadUser() {
+        dataManager.getAllUsers { users in
+            DispatchQueue.main.async {
+                switch users {
+                case .success(let users):
+                    self.users.value = users
+                case .failure(let error):
+                    self.error.value = [error]
+                }
+            }
+        }
+    }
+    
+    
+    //MARK: INPUTE - view metods
+    func viewDidLoad() {
+        loadUser()
+    }
     
     func delete(user: UsersModel) {
     }
@@ -47,5 +67,7 @@ class UsersViewModel: UsersViewModelPorotocol {
     func edit(user: UsersModel) {
     }
     
+    func didTapToDetailController(_ usersId: UsersModel) {
+    }
     
 }
