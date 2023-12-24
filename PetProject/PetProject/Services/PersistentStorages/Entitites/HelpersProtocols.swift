@@ -28,4 +28,24 @@ extension FindEntities {
         }
         return nil
     }
+    
+    
+    
+    static func findAndUpdate<Entity: NSManagedObject>(entity: Entity.Type, 
+                                                       id: Int,
+                                                       context: NSManagedObjectContext) throws -> NSFetchRequestResult? {
+        
+        let request = entity.fetchRequest()
+        do {
+            if let finded = try findEntity(byId: id,
+                                           context: context,
+                                           request: request) {
+                
+                return finded
+            }
+        } catch {
+            throw error
+        }
+        return nil
+    }
 }
