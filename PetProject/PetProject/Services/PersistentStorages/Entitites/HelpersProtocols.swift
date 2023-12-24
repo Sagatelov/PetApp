@@ -13,7 +13,9 @@ import CoreData
 protocol FindEntities {}
 extension FindEntities {
     
-    static func findEntity<EntityName>(byId: Int, context: NSManagedObjectContext, request: NSFetchRequest<EntityName>) throws -> EntityName? {
+    static func findEntity<EntityName>(byId: Int, 
+                                       context: NSManagedObjectContext,
+                                       request: NSFetchRequest<EntityName>) throws -> EntityName? {
         
         request.predicate = NSPredicate(format: "id == %d", byId)
         

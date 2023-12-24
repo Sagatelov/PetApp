@@ -12,20 +12,21 @@ protocol DataManagerProtocol {
     func getAllUsers(completionHandler: @escaping (Result<[UsersModel], Error>) -> Void)
     func getPostsBy(userId: Int, completionHandler: @escaping (Result<[PostsModel], Error>) -> Void)
     func getCommentsBy(postId: Int, completionHandler: @escaping (Result<[CommentsModel], Error>) -> Void)
-    init(network: NetworkService, coreData: CoreDataStorage)
+    init(network: NetworkServiceProtocol, coreData: CoreDataStorage)
 }
 
 
-class DataManager: DataManagerProtocol {
+final class DataManager: DataManagerProtocol {
     
-    let network: NetworkService
+    let network: NetworkServiceProtocol
     let coreData: CoreDataStorage
     
-    required init(network: NetworkService, coreData: CoreDataStorage) {
+    required init(network: NetworkServiceProtocol, coreData: CoreDataStorage) {
         self.network = network
         self.coreData = coreData
     }
 
+    //MARK: - Users
     
     func getAllUsers(completionHandler: @escaping (Result<[UsersModel], Error>) -> Void) {
         
@@ -50,6 +51,10 @@ class DataManager: DataManagerProtocol {
     }
     
     
+    
+    
+    //MARK: - Posts
+    
     func getPostsBy(userId: Int, completionHandler: @escaping (Result<[PostsModel], Error>) -> Void) {
         
         coreData.getStoragePosts(byUserId: userId) { storagePosts in
@@ -72,6 +77,7 @@ class DataManager: DataManagerProtocol {
         }
     }
     
+    //MARK: - Comments
     
     func getCommentsBy(postId: Int, completionHandler: @escaping (Result<[CommentsModel], Error>) -> Void) {
         

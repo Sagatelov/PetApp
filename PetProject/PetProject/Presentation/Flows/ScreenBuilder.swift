@@ -9,18 +9,18 @@ import Foundation
 
 
 protocol ScreenBuilderProtocol {
-    func initialUserController() -> UsersViewController
-    func postsController() -> UsersViewController
-    func commentsContrller() -> UsersViewController
+    func initialUserController(coordinator: CoordinatorConfigProtocol) -> UsersViewController
+    func postsController(coordinator: CoordinatorConfigProtocol) -> UsersViewController
+    func commentsContrller(coordinator: CoordinatorConfigProtocol) -> UsersViewController
 }
 
 final class ScreenBuilder: ScreenBuilderProtocol {
-    func postsController() -> UsersViewController {
+    func postsController(coordinator: CoordinatorConfigProtocol) -> UsersViewController {
 
         return UsersViewController()
     }
     
-    func commentsContrller() -> UsersViewController {
+    func commentsContrller(coordinator: CoordinatorConfigProtocol) -> UsersViewController {
         return UsersViewController()
     }
     

@@ -14,8 +14,10 @@ protocol InitialVCForFlowNavigatorProtocol{
 
 protocol MainFlowNavigatorProtocol {
     init(window: UIWindow)
-    var tabBar: UITabBarController { get set}
-    var screenBuilder: ScreenBuilderProtocol { get set }
+    var tabBar: UITabBarController { get }
+    var screenBuilder: ScreenBuilderProtocol { get }
+    var navigators: [InitialVCForFlowNavigatorProtocol] { get }
+    
 }
 
 final class MainFlowNavigator: MainFlowNavigatorProtocol {
@@ -32,7 +34,7 @@ final class MainFlowNavigator: MainFlowNavigatorProtocol {
         self.window = window
         self.tabBar = UITabBarController()
         self.screenBuilder = ScreenBuilder()
-        navigators = [UsersFlowCoordinator()]
+        navigators = [UsersFlowCoordinator(screenBuilder: screenBuilder)]
         let controllers = navigators.map { $0.initController() }
         tabBar.viewControllers = controllers
         window.rootViewController = tabBar

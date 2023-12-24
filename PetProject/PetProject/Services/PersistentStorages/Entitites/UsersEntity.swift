@@ -27,7 +27,9 @@ final class UsersEntity: NSManagedObject, FindEntities {
         let request = UsersEntity.fetchRequest()
         
         do {
-            if let findeUserEntity = try findEntity(byId: user.id, context: context, request: request) {
+            if let findeUserEntity = try findEntity(byId: user.id, 
+                                                    context: context,
+                                                    request: request) {
                 return findeUserEntity
             } else {
                 let createUser = UsersEntity(context: context)
@@ -41,5 +43,4 @@ final class UsersEntity: NSManagedObject, FindEntities {
             throw error
         }
     }
-    
 }

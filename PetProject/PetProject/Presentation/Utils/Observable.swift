@@ -22,7 +22,7 @@ class Observable<Value> {
         }
     }
     
-    init(value: Value) {
+    init(_ value: Value) {
         self.value = value
     }
     

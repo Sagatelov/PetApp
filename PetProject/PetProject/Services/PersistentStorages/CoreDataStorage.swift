@@ -149,5 +149,5 @@ final class CoreDataStorage {
             }
         }
     }
-    
 }
+

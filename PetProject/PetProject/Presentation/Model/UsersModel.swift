@@ -17,7 +17,7 @@ struct UsersModel: Codable {
     var website: String?
     var company: UserCompanyInfo?
     
-    init (entity: UsersEntity) {
+    init(entity: UsersEntity) {
         self.id = Int(entity.id)
         self.name = entity.name ?? ""
         self.username = entity.username ?? ""

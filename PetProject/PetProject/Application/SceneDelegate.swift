@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let window = window else { return }
         window.makeKeyAndVisible()
-        let initNavigator = MainFlowNavigator(window: window)
+        _ = MainFlowNavigator(window: window)
         
     }
     
