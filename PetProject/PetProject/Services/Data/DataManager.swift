@@ -12,6 +12,7 @@ protocol DataManagerProtocol {
     func getAllUsers(completionHandler: @escaping (Result<[UsersModel], Error>) -> Void)
     func getPostsBy(userId: Int, completionHandler: @escaping (Result<[PostsModel], Error>) -> Void)
     func getCommentsBy(postId: Int, completionHandler: @escaping (Result<[CommentsModel], Error>) -> Void)
+    func editUser(_ user: UsersModel, completion: @escaping (Result<UsersModel, Error>) -> Void)
     init(network: NetworkServiceProtocol, coreData: CoreDataStorage)
 }
 
@@ -50,8 +51,23 @@ final class DataManager: DataManagerProtocol {
         }
     }
     
-    
-    
+    func editUser(_ user: UsersModel, completion: @escaping (Result<UsersModel, Error>) -> Void) {
+        coreData.update(user: user) { userEntity in
+            userEntity.email = user.email
+            userEntity.id = Int64(user.id)
+            userEntity.name = user.name
+            userEntity.username = user.username
+        }
+        network.editingUser(user: user) { result in
+            switch result {
+            case .success(let editedUser):
+                completion(.success(editedUser))
+                print(editedUser)
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
     
     //MARK: - Posts
     
