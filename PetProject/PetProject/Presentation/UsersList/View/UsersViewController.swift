@@ -11,7 +11,7 @@ class UsersViewController: UIViewController, TableConfig {
     
     @IBOutlet private weak var usersListTableView: UITableView!
     
-    private var userViewModel: UsersViewModel!
+    private var userViewModel: UsersViewModelPorotocol!
     private var idCell: String!
     
     static func initUsersList(viewModel: UsersViewModel) -> UsersViewController {
@@ -29,13 +29,13 @@ class UsersViewController: UIViewController, TableConfig {
         bind(to: userViewModel)
     }
     
-    private func bind(to viewModel: UsersViewModel) {
+    private func bind(to viewModel: UsersViewModelPorotocol) {
         
-        viewModel.users.observe(on: self) { [weak self] users in
+        viewModel.users.observe(on: self) { [weak self] _ in
             self?.usersListTableView.reloadData() }
-        viewModel.error.observe(on: self) {  [weak self] error in
+        viewModel.error.observe(on: self) { [weak self] error in
             guard let error = error.first else { return }
-            self?.errorAlert(error: error )
+            self?.errorAlert(error: error)
         }
     }
     
@@ -43,6 +43,7 @@ class UsersViewController: UIViewController, TableConfig {
         let alert = UIAlertController(title: "Warning", message: error.localizedDescription, preferredStyle: .alert)
         let action = UIAlertAction(title: "ок", style: .default)
         alert.addAction(action)
+        present(alert, animated: true)
     }
 }
 
@@ -57,6 +58,31 @@ extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
         let user = userViewModel.users.value[indexPath.row]
         cell.configureCell(users: user)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let user = self.userViewModel.users.value[indexPath.row]
+        let model = self.userViewModel
+        
+        let actionEdite = UIContextualAction(style: .normal, title: "Edite") { action, view, completion in
+            
+            model?.edit(user: user)
+            completion(true)
+        }
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, completion in
+            
+            model?.delete(user: user)
+            completion(true)
+        }
+        
+        actionEdite.backgroundColor = .purple
+        
+        let swipeConfigur = UISwipeActionsConfiguration(actions: [actionEdite, deleteAction])
+        swipeConfigur.performsFirstActionWithFullSwipe = false
+        
+        return swipeConfigur
     }
     
     
