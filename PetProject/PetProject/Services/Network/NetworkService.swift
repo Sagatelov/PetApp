@@ -11,9 +11,10 @@ protocol NetworkServiceProtocol {
     func getAllUsers(completionHandler: @escaping (Result<[UsersModel], Error>) -> Void) -> Void
     func getPostBy(userId: Int, completionHandler: @escaping (Result<[PostsModel], Error>) -> Void) -> Void
     func getCommentsBy(postId: Int, completionHandler: @escaping (Result<[CommentsModel], Error>) -> Void) -> Void
+    func editingUser(user: UsersModel, completionHandler: @escaping (Result<UsersModel, Error>) -> Void)
 }
 
-class NetworkService {
+final class NetworkService {
     
     enum HTTPMetod: String {
         case GET
@@ -30,6 +31,7 @@ class NetworkService {
     }
     
     let url = "https://jsonplaceholder.typicode.com/"
+    let successfulStatusCodes = [200, 201, 204, 202]
 }
 
 extension NetworkService: NetworkServiceProtocol {
