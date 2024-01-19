@@ -35,6 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="kV1-xV-slR" firstAttribute="top" secondItem="ItB-xi-trF" secondAttribute="bottom" constant="9.3333333333333357" id="GyM-4N-FyI"/>
                     <constraint firstItem="A7V-Fk-jw3" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="cq5-1r-Cvl"/>
@@ -51,7 +52,7 @@
                 <outlet property="lableThree" destination="A7V-Fk-jw3" id="lHU-Fe-Thf"/>
                 <outlet property="lableTwo" destination="kV1-xV-slR" id="TzF-ME-Ass"/>
             </connections>
-            <point key="canvasLocation" x="-48.854961832061065" y="-42.253521126760567"/>
+            <point key="canvasLocation" x="21" y="-58"/>
         </tableViewCell>
     </objects>
 </document>

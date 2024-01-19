@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,23 +20,18 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="fls-Cj-QT8">
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="YM7-Tw-tM1"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="YM7-Tw-tM1" firstAttribute="bottom" secondItem="fls-Cj-QT8" secondAttribute="bottom" id="2RI-za-Jd9"/>
                 <constraint firstItem="fls-Cj-QT8" firstAttribute="top" secondItem="YM7-Tw-tM1" secondAttribute="top" id="4sE-FN-FFW"/>
                 <constraint firstItem="fls-Cj-QT8" firstAttribute="leading" secondItem="YM7-Tw-tM1" secondAttribute="leading" id="PNn-uU-2dp"/>
                 <constraint firstItem="YM7-Tw-tM1" firstAttribute="trailing" secondItem="fls-Cj-QT8" secondAttribute="trailing" id="jRr-kv-Mj9"/>
             </constraints>
-            <point key="canvasLocation" x="-160" y="-137"/>
+            <point key="canvasLocation" x="-8" y="-182"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
