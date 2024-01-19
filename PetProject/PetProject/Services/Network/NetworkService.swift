@@ -56,6 +56,33 @@ extension NetworkService: NetworkServiceProtocol {
         
     }
     
+    
+    func editingUser(user: UsersModel, completionHandler: @escaping (Result<UsersModel, Error>) -> Void) {
+        guard let url = URL(string: url + APIs.users.rawValue + "/" + String(user.id)),
+              let data = try? JSONEncoder().encode(user) else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMetod.PATCH.rawValue
+        request.httpBody = data
+        request.setValue("\(data.count)", forHTTPHeaderField: "Content-Length")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completionHandler(.failure(error))
+            } else if let response = response as? HTTPURLResponse, 
+                        self.successfulStatusCodes.contains(response.statusCode),
+                        let data = data {
+                do {
+                    let data = try JSONDecoder().decode(UsersModel.self, from: data)
+                    completionHandler(.success(data))
+                } catch {
+                    completionHandler(.failure(error))
+                }
+            }
+        }.resume()
+    }
+    
     //MARK: - get posts by selected user
     
     func getPostBy(userId: Int, completionHandler: @escaping (Result<[PostsModel], Error>) -> Void) {
