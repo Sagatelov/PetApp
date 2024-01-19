@@ -15,8 +15,8 @@ protocol InitialVCForFlowNavigatorProtocol{
 protocol MainFlowNavigatorProtocol {
     init(window: UIWindow)
     var tabBar: UITabBarController { get }
+    var navigators: [CoordinatorConfigProtocol] { get }
     var screenBuilder: ScreenBuilderProtocol { get }
-    var navigators: [InitialVCForFlowNavigatorProtocol] { get }
     
 }
 
@@ -25,7 +25,7 @@ final class MainFlowNavigator: MainFlowNavigatorProtocol {
     
     private var window: UIWindow
     var tabBar: UITabBarController
-    var navigators: [InitialVCForFlowNavigatorProtocol] = []
+    var navigators: [CoordinatorConfigProtocol] = []
     var screenBuilder: ScreenBuilderProtocol
     
     
