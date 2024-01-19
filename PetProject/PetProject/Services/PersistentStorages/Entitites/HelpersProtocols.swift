@@ -13,9 +13,10 @@ import CoreData
 protocol FindEntities {}
 extension FindEntities {
     
-    static func findEntity<EntityName>(byId: Int, 
+    static func findEntity<EntityName>(byId: Int,
                                        context: NSManagedObjectContext,
-                                       request: NSFetchRequest<EntityName>) throws -> EntityName? {
+                                       request: NSFetchRequest<EntityName>) 
+    throws -> EntityName? {
         
         request.predicate = NSPredicate(format: "id == %d", byId)
         
@@ -33,9 +34,10 @@ extension FindEntities {
     
     
     
-    static func findAndUpdate<Entity: NSManagedObject>(entity: Entity.Type, 
+    static func findAndUpdate<Entity: NSManagedObject>(entity: Entity.Type,
                                                        id: Int,
-                                                       context: NSManagedObjectContext) throws -> NSFetchRequestResult? {
+                                                       context: NSManagedObjectContext)
+    throws -> NSFetchRequestResult? {
         
         let request = entity.fetchRequest()
         do {
