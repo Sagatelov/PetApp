@@ -15,8 +15,9 @@ protocol UsersViewModelOutput {
     var error: Observable<[Error]> { get }
 }
 
-// MARK: Inpute
+// MARK: Input
 protocol UsersViewModelInput {
+    func viewDidLoad()
     func delete(user: UsersModel)
     func create()
     func edit(user: UsersModel)
@@ -53,7 +54,7 @@ final class UsersViewModel: UsersViewModelPorotocol {
     }
     
     
-    //MARK: INPUTE - view metods
+    //MARK: Input - view metods
     func viewDidLoad() {
         loadUser()
     }
@@ -65,6 +66,7 @@ final class UsersViewModel: UsersViewModelPorotocol {
     }
     
     func edit(user: UsersModel) {
+        flowCoordinator.edit(user: user)
     }
     
     func didTapToDetailController(_ usersId: UsersModel) {
