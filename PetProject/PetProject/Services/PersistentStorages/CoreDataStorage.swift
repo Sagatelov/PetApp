@@ -71,13 +71,17 @@ final class CoreDataStorage {
         }
     }
     
-    func update(user: UsersModel, copletionHandler: @escaping (UsersEntity) -> Void) -> Void {
+    func update(user: UsersModel, completionHandler: @escaping (UsersEntity) -> Void) {
         let context = persistentContainer.viewContext
         context.perform {
             do {
-                if let finded = try UsersEntity.findAndUpdate(entity: UsersEntity.self, id: user.id, context: context) {
+                if let finded = try UsersEntity.findAndUpdate(entity: UsersEntity.self,
+                                                              id: user.id,
+                                                              context: context) {
+                    
                     if let entity = finded as? UsersEntity {
-                        copletionHandler(entity)
+                        completionHandler(entity)
+                        
                     }
                     try context.save()
                 }
