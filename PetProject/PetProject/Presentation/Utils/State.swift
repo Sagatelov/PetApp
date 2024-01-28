@@ -8,6 +8,6 @@
 import Foundation
 
 enum State: Equatable {
-    case success
+    case successString(String)
     case errorString(String)
 }

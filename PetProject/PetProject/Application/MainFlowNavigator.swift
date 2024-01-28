@@ -31,12 +31,14 @@ final class MainFlowNavigator: MainFlowNavigatorProtocol {
     
     
     required init(window: UIWindow) {
-        self.window = window
-        self.tabBar = UITabBarController()
-        self.screenBuilder = ScreenBuilder()
+        screenBuilder = ScreenBuilder()
         navigators = [UsersFlowCoordinator(screenBuilder: screenBuilder)]
+        
         let controllers = navigators.map { $0.initController() }
-        tabBar.viewControllers = controllers
+        tabBar = UITabBarController()
+        tabBar.setViewControllers(controllers, animated: true)
+        
+        self.window = window
         window.rootViewController = tabBar
     }
 }

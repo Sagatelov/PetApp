@@ -14,14 +14,24 @@ class UserTableViewCell: UITableViewCell {
     @IBOutlet weak var lableTwo: UILabel!
     @IBOutlet weak var Lable: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setColorStyle()
     }
-
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setColorStyle()
+    }
+    
     func configureCell(users: UsersModel) -> Void {
         Lable.text = users.name
         lableTwo.text = users.username
         lableThree.text = users.email
+    }
+    
+    func setColorStyle() {
+        backgroundColor = .darkGray
+        selectionStyle = .none
     }
 }

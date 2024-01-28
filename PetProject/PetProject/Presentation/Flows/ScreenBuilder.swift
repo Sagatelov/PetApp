@@ -9,15 +9,15 @@ import Foundation
 
 
 protocol ScreenBuilderProtocol {
-    func initialUserController(coordinator: CoordinatorConfigProtocol) -> UsersViewController
-    func showEditUserController(user: UsersModel, coordinator:CoordinatorConfigProtocol ) -> UserEditViewController
-    func postsController(coordinator: CoordinatorConfigProtocol) -> UsersViewController
-    func commentsContrller(coordinator: CoordinatorConfigProtocol) -> UsersViewController
+    func initialUserList(coordinator: CoordinatorConfigProtocol) -> UsersViewController
+    func showEditUserScreen(user: UsersModel, coordinator:CoordinatorConfigProtocol ) -> UserEditViewController
+    func postsList(coordinator: CoordinatorConfigProtocol, userId: Int) -> PostsListViewController
+    func commentsList(coordinator: CoordinatorConfigProtocol, postsId: Int) -> CommentsListViewController
 }
 
 final class ScreenBuilder: ScreenBuilderProtocol {
     
-    func showEditUserController(user: UsersModel, coordinator:CoordinatorConfigProtocol ) -> UserEditViewController {
+    func showEditUserScreen(user: UsersModel, coordinator:CoordinatorConfigProtocol ) -> UserEditViewController {
         let network = NetworkService()
         let coreDataStorage = CoreDataStorage.sared
         let dataManager = DataManager(network: network, coreData: coreDataStorage)
@@ -26,16 +26,25 @@ final class ScreenBuilder: ScreenBuilderProtocol {
         return editController
     }
     
-    func postsController(coordinator: CoordinatorConfigProtocol) -> UsersViewController {
-
-        return UsersViewController()
+    func postsList(coordinator: CoordinatorConfigProtocol, userId: Int) -> PostsListViewController {
+        let network = NetworkService()
+        let coreDataStorage = CoreDataStorage.sared
+        let dataManager = DataManager(network: network, coreData: coreDataStorage)
+        let viewModel = PostsListViewModel(userId: userId, dataManager: dataManager, flowCoordinator: coordinator)
+        let userListsInit = PostsListViewController.initPostsList(viewModel: viewModel)
+        return userListsInit
     }
     
-    func commentsContrller(coordinator: CoordinatorConfigProtocol) -> UsersViewController {
-        return UsersViewController()
+    func commentsList(coordinator: CoordinatorConfigProtocol, postsId: Int) -> CommentsListViewController {
+        let network = NetworkService()
+        let coreDataStorage = CoreDataStorage.sared
+        let dataManager = DataManager(network: network, coreData: coreDataStorage)
+        let viewModel = CommentsListViewModel(postId: postsId, dataManager: dataManager, flowCoordinator: coordinator)
+        let initCommentsList = CommentsListViewController.initCommentsList(viewModel: viewModel)
+        return initCommentsList
     }
     
-    func initialUserController(coordinator: CoordinatorConfigProtocol) -> UsersViewController {
+    func initialUserList(coordinator: CoordinatorConfigProtocol) -> UsersViewController {
         let network = NetworkService()
         let coreDataStorage = CoreDataStorage.sared
         let dataManager = DataManager(network: network, coreData: coreDataStorage)

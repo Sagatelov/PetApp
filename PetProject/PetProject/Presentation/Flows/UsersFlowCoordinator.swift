@@ -15,15 +15,15 @@ protocol MainFlowCoordinatorProtocol {
 
 protocol FlowUsersProtocol: MainFlowCoordinatorProtocol {
     func edit(user: UsersModel)
-    func showComments()
-    func showPosts()
+    func showComments(by postsId: Int)
+    func showPosts(by userId: Int)
     func popToRoot()
 }
 
 typealias CoordinatorConfigProtocol = FlowUsersProtocol & InitialVCForFlowNavigatorProtocol
 
 final class UsersFlowCoordinator: CoordinatorConfigProtocol {
-
+    
     var navigation: UINavigationController
     var screenBuilder: ScreenBuilderProtocol
     
@@ -33,16 +33,20 @@ final class UsersFlowCoordinator: CoordinatorConfigProtocol {
     }
     
     func edit(user: UsersModel) {
-        let userEdite = screenBuilder.showEditUserController(user: user, coordinator: self)
+        let userEdite = screenBuilder.showEditUserScreen(user: user, coordinator: self)
         navigation.pushViewController(userEdite, animated: true)
     }
     
-    
-    func showComments() {
+    func showPosts(by userId: Int) {
+        let postsList = screenBuilder.postsList(coordinator: self, userId: userId)
+        navigation.pushViewController(postsList, animated: true)
     }
     
-    func showPosts() {
+    func showComments(by postsId: Int) {
+        let commentsList = screenBuilder.commentsList(coordinator: self, postsId: postsId)
+        navigation.pushViewController(commentsList, animated: true)
     }
+    
     
     func popToRoot() {
     }
@@ -51,7 +55,7 @@ final class UsersFlowCoordinator: CoordinatorConfigProtocol {
     
     ///return initial view controller for MainFlowNavigator
     func initController() -> UIViewController {
-        let usersList = screenBuilder.initialUserController(coordinator: self)
+        let usersList = screenBuilder.initialUserList(coordinator: self)
         navigation.viewControllers = [usersList]
         return navigation
     }

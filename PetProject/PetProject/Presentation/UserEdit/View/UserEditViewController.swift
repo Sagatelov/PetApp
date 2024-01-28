@@ -18,6 +18,7 @@ class UserEditViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var validationLabel: UILabel!
     
+    @IBOutlet weak var test: UITextField!
     
     private var viewModel: UserEditViewModelPorotocol!
     private var updateBarButton: UIBarButtonItem!
@@ -25,7 +26,7 @@ class UserEditViewController: UIViewController, UITextFieldDelegate {
     
     weak var delegat: ConectViewModelDelegat?
     
-    static func initUserEdit(viewModel: UserEditViewModel) -> UserEditViewController {
+    static func initUserEdit(viewModel: UserEditViewModelPorotocol) -> UserEditViewController {
         let controler = UserEditViewController()
         controler.viewModel = viewModel
         return controler
@@ -34,26 +35,50 @@ class UserEditViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameTextField.delegate = self
-        userNameTextField.delegate = self
-        emailTextField.delegate = self
+        setTextField([
+            nameTextField,
+            userNameTextField,
+            emailTextField ])
         
+        setColor()
+        setDelegate()
         configValidationLabel()
         configBarButton()
-        viewModel.viewDidLoad()
         bind(to: viewModel)
     }
     
-    // MARK: Private
+    // MARK: - Private
+    
+    
+    private func setTextField(_ fields: [UITextField]) {
+        let font = UIFont(name: "Ubuntu-Regular", size: 16)
+        fields.forEach {
+            $0.layer.cornerRadius = 18
+            $0.layer.borderWidth = 1
+            $0.layer.borderColor = UIColor.systemGray.cgColor
+            $0.clipsToBounds = true
+            $0.font = font
+        }
+    }
+    
+    private func setDelegate() {
+        nameTextField.delegate = self
+        userNameTextField.delegate = self
+        emailTextField.delegate = self
+    }
+    
+    private func setColor() {
+        view.backgroundColor = .darkGray
+    }
     
     private func configValidationLabel() {
-        validationLabel.textColor = UIColor.red
+        validationLabel.textColor = #colorLiteral(red: 1, green: 0.4932563305, blue: 0.4739957452, alpha: 1)
         validationLabel.isHidden = true
     }
     
     private func configBarButton() {
         updateBarButton = UIBarButtonItem()
-        updateBarButton.tintColor = UIColor.green
+        updateBarButton.tintColor = UIColor.systemGreen
         updateBarButton.title = "Update"
         updateBarButton.isEnabled = true
         updateBarButton.isHidden = true
@@ -65,7 +90,7 @@ class UserEditViewController: UIViewController, UITextFieldDelegate {
     @objc private func action() {
         var editUser = [String:String]()
         editUser.updateValue(nameTextField.text ?? "", forKey: "name")
-        editUser.updateValue(userNameTextField.text ?? "", forKey: "userName")
+        editUser.updateValue(userNameTextField.text ?? "", forKey: "username")
         editUser.updateValue(emailTextField.text ?? "", forKey: "email")
         viewModel.editingUser(data: editUser)
     }
@@ -86,7 +111,7 @@ class UserEditViewController: UIViewController, UITextFieldDelegate {
     
     private func editingResultAlert(_ state: State?) {
         switch state {
-        case .success:
+        case .successString(_):
             alert(title: "Пользователь обновлен", messege: "Редактирование прошло успешно")
         case .errorString(let error):
             alert(title: "Ошибка редактирования", messege: error)
@@ -101,7 +126,7 @@ class UserEditViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    //MARK: logic for editing fields
+    //MARK: - logic for editing fields
     
     private func handleEmailTextFieldValidation(_ textField: UITextField, _ range: NSRange, _ string: String) -> Bool {
         
@@ -169,7 +194,7 @@ class UserEditViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    //MARK: Delegate
+    //MARK: - Delegate
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         

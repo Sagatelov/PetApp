@@ -27,6 +27,13 @@ struct UsersModel: Codable {
         self.website = nil
         self.company = nil
     }
+    
+    init(newUser name: String, username: String, email: String) {
+        self.id = 0
+        self.name = name
+        self.username = username
+        self.email = email
+    }
 }
 
 struct UserAddressInfo: Codable {
