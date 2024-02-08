@@ -8,12 +8,17 @@
 import Foundation
 
 protocol NetworkServiceProtocol {
+    //users manage
     func getAllUsers(completionHandler: @escaping (Result<[UsersModel], Error>) -> Void) -> Void
+    func editingUser(user: UsersModel, completionHandler: @escaping (Result<UsersModel, Error>) -> Void)
+    func deleteBy(userId: Int, completionHandler: @escaping (Result<UsersModel, Error>) -> Void)
+    //posts manage
     func getPostBy(userId: Int, completionHandler: @escaping (Result<[PostsModel], Error>) -> Void) -> Void
+    //comments manage
     func getCommentsBy(postId: Int, completionHandler: @escaping (Result<[CommentsModel], Error>) -> Void) -> Void
 }
 
-class NetworkService {
+final class NetworkService {
     
     enum HTTPMetod: String {
         case GET
@@ -30,11 +35,13 @@ class NetworkService {
     }
     
     let url = "https://jsonplaceholder.typicode.com/"
+    let successfulStatusCodes = [200, 201, 204, 202]
 }
 
 extension NetworkService: NetworkServiceProtocol {
     
-    //MARK: - get all users from server
+    //MARK: - Users
+    //get all users
     
     func getAllUsers(completionHandler: @escaping (Result<[UsersModel], Error>) -> Void) {
         guard let url = URL(string: url + APIs.users.rawValue) else { return }
@@ -56,7 +63,61 @@ extension NetworkService: NetworkServiceProtocol {
         
     }
     
-    //MARK: - get posts by selected user
+    //EDITE
+    func editingUser(user: UsersModel, completionHandler: @escaping (Result<UsersModel, Error>) -> Void) {
+        guard let url = URL(string: url + APIs.users.rawValue + "/" + String(user.id)),
+              let data = try? JSONEncoder().encode(user) else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMetod.PATCH.rawValue
+        request.httpBody = data
+        request.setValue("\(data.count)", forHTTPHeaderField: "Content-Length")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completionHandler(.failure(error))
+            } else if let response = response as? HTTPURLResponse, 
+                        self.successfulStatusCodes.contains(response.statusCode),
+                        let data = data {
+                do {
+                    let responceData = try JSONDecoder().decode(UsersModel.self, from: data)
+                    print(responceData)
+                    
+                    completionHandler(.success(responceData))
+                } catch {
+                    completionHandler(.failure(error))
+                }
+            }
+        }.resume()
+    }
+    
+    //DELETE
+    func deleteBy(userId: Int, completionHandler: @escaping (Result<UsersModel, Error>) -> Void) {
+        guard let url = URL(string: url + APIs.users.rawValue + "/" + String(userId)) else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMetod.DELETE.rawValue
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completionHandler(.failure(error))
+            } else if let response = response as? HTTPURLResponse,
+                      self.successfulStatusCodes.contains(response.statusCode),
+                      let data = data {
+                
+                do {
+                    let responseData = try JSONDecoder().decode(UsersModel.self, from: data)
+                    print(responseData)
+                    completionHandler(.success(responseData))
+                } catch {
+                    completionHandler(.failure(error))
+                }
+            }
+        }.resume()
+    }
+    
+    //MARK: - Posts
     
     func getPostBy(userId: Int, completionHandler: @escaping (Result<[PostsModel], Error>) -> Void) {
         guard let url = URL(string: url + APIs.posts.rawValue) else {return}
@@ -86,7 +147,7 @@ extension NetworkService: NetworkServiceProtocol {
     //MARK: - get comments by selected post
     
     func getCommentsBy(postId: Int, completionHandler: @escaping (Result<[CommentsModel], Error>) -> Void) {
-        guard let url = URL(string: url) else { return }
+        guard let url = URL(string: url + APIs.comments.rawValue) else { return }
         
         var urlComponets = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponets?.queryItems = [URLQueryItem(name: "postId", value: "\(postId)")]

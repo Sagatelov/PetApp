@@ -17,7 +17,7 @@ struct UsersModel: Codable {
     var website: String?
     var company: UserCompanyInfo?
     
-    init (entity: UsersEntity) {
+    init(entity: UsersEntity) {
         self.id = Int(entity.id)
         self.name = entity.name ?? ""
         self.username = entity.username ?? ""
@@ -26,6 +26,13 @@ struct UsersModel: Codable {
         self.phone = nil
         self.website = nil
         self.company = nil
+    }
+    
+    init(newUser name: String, username: String, email: String) {
+        self.id = 0
+        self.name = name
+        self.username = username
+        self.email = email
     }
 }
 

@@ -8,14 +8,30 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UsersViewController" customModule="PetProject" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UsersViewController" customModule="PetProject" customModuleProvider="target">
+            <connections>
+                <outlet property="usersListTableView" destination="fls-Cj-QT8" id="Puo-xB-vtV"/>
+                <outlet property="view" destination="iTe-Mp-Sq8" id="DIG-tG-gle"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" id="iTe-Mp-Sq8">
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-            <point key="canvasLocation" x="131" y="-11"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="fls-Cj-QT8">
+                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="YM7-Tw-tM1"/>
+            <constraints>
+                <constraint firstItem="YM7-Tw-tM1" firstAttribute="bottom" secondItem="fls-Cj-QT8" secondAttribute="bottom" id="2RI-za-Jd9"/>
+                <constraint firstItem="fls-Cj-QT8" firstAttribute="top" secondItem="YM7-Tw-tM1" secondAttribute="top" id="4sE-FN-FFW"/>
+                <constraint firstItem="fls-Cj-QT8" firstAttribute="leading" secondItem="YM7-Tw-tM1" secondAttribute="leading" id="PNn-uU-2dp"/>
+                <constraint firstItem="YM7-Tw-tM1" firstAttribute="trailing" secondItem="fls-Cj-QT8" secondAttribute="trailing" id="jRr-kv-Mj9"/>
+            </constraints>
+            <point key="canvasLocation" x="-8" y="-182"/>
         </view>
     </objects>
     <resources>

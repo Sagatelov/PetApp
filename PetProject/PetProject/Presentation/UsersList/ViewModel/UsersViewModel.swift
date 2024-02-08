@@ -7,41 +7,82 @@
 
 import Foundation
 
+// MARK: Outputsa
 protocol UsersViewModelOutput {
-    var dataManager: DataManager { get }
-    var flowCordinator: UsersFlowCoordinator { get }
-    var users: [UsersModel]? { get }
+    var users: Observable<[UsersModel]> { get }
+    var error: Observable<[Error]> { get }
+    var alert: Observable<State?> { get }
+    var dataManager: DataManagerProtocol { get }
+    var flowCoordinator: CoordinatorConfigProtocol { get }
 }
 
-protocol UsersViewModelInpute {
-    func delete(user: UsersModel)
-    func create()
+// MARK: Input
+protocol UsersViewModelInput {
+    func viewDidLoad()
+    func deleteUserBy(id: Int)
+//    func create()
     func edit(user: UsersModel)
+    func didTapOnUser(_ usersId: Int)
 }
 
-typealias UsersViewModelPorotocol = UsersViewModelInpute & UsersViewModelOutput
+typealias UsersViewModelPorotocol = UsersViewModelInput & UsersViewModelOutput
 
-class UsersViewModel: UsersViewModelPorotocol {
+final class UsersViewModel: UsersViewModelPorotocol {
     
-    var users: [UsersModel]?
-    var dataManager: DataManager
-    var flowCordinator: UsersFlowCoordinator
+    var alert: Observable<State?> = Observable(.none)
+    var error: Observable<[Error]> = Observable([])
+    var users: Observable<[UsersModel]> = Observable([])
     
-    init(dataManager: DataManager, flowCordinator: UsersFlowCoordinator) {
+    
+    var dataManager: DataManagerProtocol
+    var flowCoordinator: CoordinatorConfigProtocol
+    
+    init(dataManager: DataManagerProtocol, flowCoordinator: CoordinatorConfigProtocol) {
         self.dataManager = dataManager
-        self.flowCordinator = flowCordinator
+        self.flowCoordinator = flowCoordinator
     }
     
     
     
-    func delete(user: UsersModel) {
+    private func loadUser() {
+        dataManager.getAllUsers { users in
+            DispatchQueue.main.async {
+                switch users {
+                case .success(let users):
+                    self.users.value = users
+                case .failure(let error):
+                    self.error.value = [error] }
+            }
+        }
     }
     
-    func create() {
+    
+    //MARK: Input - view methods
+    
+    func viewDidLoad() {
+        loadUser()
     }
+    
+    func deleteUserBy(id: Int) {
+        dataManager.deleteUser(id) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let deletedUser): self.alert.value = .successString("\(deletedUser.id)")
+                case .failure(let error): self.error.value = [error]
+                }
+            }
+        }
+    }
+    
+//    func create() {
+//    }
     
     func edit(user: UsersModel) {
+        flowCoordinator.edit(user: user)
     }
     
+    func didTapOnUser(_ usersId: Int) {
+        flowCoordinator.showPosts(by: usersId)
+    }
     
 }

@@ -40,7 +40,7 @@ final class CoreDataStorage {
     private init () { }
     
     
-    // MARK: - save and fetch for User
+    // MARK: - Users
     
     func getStorageUsers(completionHandler: @escaping ([UsersModel]) -> Void) {
         
@@ -69,10 +69,51 @@ final class CoreDataStorage {
                 print("Error saving Users in CoreData: \(error)")
             }
         }
-        
     }
     
-    // MARK: - save and fetch for Posts
+    func update(user: UsersModel, completionHandler: @escaping (UsersEntity) -> Void) {
+        
+        let context = persistentContainer.viewContext
+        context.perform {
+            
+            do {
+                if let finded = try UsersEntity.findAndUpdate(entity: UsersEntity.self,
+                                                              id: user.id,
+                                                              context: context) {
+                    
+                    if let entity = finded as? UsersEntity {
+                        completionHandler(entity)
+                        try context.save()
+                    }
+                }
+            } catch {
+                print("Error update Users in CoreData: \(error)")
+            }
+        }
+    }
+    
+    func deleteUser(byId: Int, completionHandler: @escaping () -> Void) {
+        
+        let context = persistentContainer.viewContext
+        context.perform {
+            do {
+                if let finded = try UsersEntity.findAndUpdate(entity: UsersEntity.self,
+                                                                   id: byId,
+                                                                   context: context) {
+                    if let entity = finded as? UsersEntity {
+                        context.delete(entity)
+                        try context.save()
+                        
+                        completionHandler()
+                    }
+                }
+            } catch {
+                print("Error delete Users in CoreData: \(error)")
+            }
+        }
+    }
+    
+    // MARK: - Posts
     
     func getStoragePosts(byUserId: Int, completionHandler: @escaping ([PostsModel]) -> Void) {
         let context = persistentContainer.viewContext
@@ -104,7 +145,7 @@ final class CoreDataStorage {
         }
     }
     
-    // MARK: - save and fatch for Comments
+    // MARK: - Comments
     
     func getStorageComments(byPostsId: Int, completionHandler: @escaping ([CommentsModel]) -> Void) {
         let context = persistentContainer.viewContext
@@ -134,5 +175,5 @@ final class CoreDataStorage {
             }
         }
     }
-    
 }
+

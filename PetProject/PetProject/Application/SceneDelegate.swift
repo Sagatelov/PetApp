@@ -14,11 +14,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let mainScene = (scene as? UIWindowScene) else { return }
+        setAppearance()
         window = UIWindow(windowScene: mainScene)
         
         guard let window = window else { return }
         window.makeKeyAndVisible()
-        let initNavigator = MainFlowNavigator(window: window)
+        _ = MainFlowNavigator(window: window)
         
     }
     
