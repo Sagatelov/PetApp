@@ -140,13 +140,13 @@
 		9496BED22B5F12E600180A9C /* CommentCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCreateViewModel.swift; sourceTree = "<group>"; };
 		9496BED42B5F12FA00180A9C /* CommentCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCreateViewController.swift; sourceTree = "<group>"; };
 		9496BED52B5F12FA00180A9C /* CommentCreateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentCreateViewController.xib; sourceTree = "<group>"; };
+		949EC1F52B755233002FCE4A /* PetProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PetProject.app; path = "/Users/sagatelov/Desktop/PetApp/PetProject/build/Debug-iphoneos/PetProject.app"; sourceTree = "<absolute>"; };
+		949EC1F62B755233002FCE4A /* PetProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = PetProjectTests.xctest; path = "/Users/sagatelov/Desktop/PetApp/PetProject/build/Debug-iphoneos/PetProjectTests.xctest"; sourceTree = "<absolute>"; };
+		949EC1F72B755233002FCE4A /* PetProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = PetProjectUITests.xctest; path = "/Users/sagatelov/Desktop/PetApp/PetProject/build/Debug-iphoneos/PetProjectUITests.xctest"; sourceTree = "<absolute>"; };
 		94A4EE4D2B2B793300ED4F99 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		94A5E35E2B5EE9B8006804B4 /* UserCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserCreateViewModel.swift; path = ../../../../../../../Documents/UserCreateViewModel.swift; sourceTree = "<group>"; };
 		94A5E3622B5EEA69006804B4 /* UserCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCreateViewController.swift; sourceTree = "<group>"; };
 		94A5E3632B5EEA69006804B4 /* UserCreateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCreateViewController.xib; sourceTree = "<group>"; };
-		94A6A45F2B66E0AE00C61A4E /* PetProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		94A6A4602B66E0AE00C61A4E /* PetProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PetProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		94A6A4612B66E0AE00C61A4E /* PetProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PetProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		94A87F692B5080D500B71325 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		94BE1DFE2B62C90C00BD5C96 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		94BE1E002B62D7F600BD5C96 /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
@@ -251,9 +251,6 @@
 				9472B6212B17DF4900B7620C /* PetProject */,
 				9472B63B2B17DF4B00B7620C /* PetProjectTests */,
 				9472B6452B17DF4B00B7620C /* PetProjectUITests */,
-				94A6A45F2B66E0AE00C61A4E /* PetProject.app */,
-				94A6A4602B66E0AE00C61A4E /* PetProjectTests.xctest */,
-				94A6A4612B66E0AE00C61A4E /* PetProjectUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -660,7 +657,7 @@
 			);
 			name = PetProject;
 			productName = PetProject;
-			productReference = 94A6A45F2B66E0AE00C61A4E /* PetProject.app */;
+			productReference = 949EC1F52B755233002FCE4A /* PetProject.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9472B6372B17DF4B00B7620C /* PetProjectTests */ = {
@@ -678,7 +675,7 @@
 			);
 			name = PetProjectTests;
 			productName = PetProjectTests;
-			productReference = 94A6A4602B66E0AE00C61A4E /* PetProjectTests.xctest */;
+			productReference = 949EC1F62B755233002FCE4A /* PetProjectTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		9472B6412B17DF4B00B7620C /* PetProjectUITests */ = {
@@ -696,7 +693,7 @@
 			);
 			name = PetProjectUITests;
 			productName = PetProjectUITests;
-			productReference = 94A6A4612B66E0AE00C61A4E /* PetProjectUITests.xctest */;
+			productReference = 949EC1F72B755233002FCE4A /* PetProjectUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
