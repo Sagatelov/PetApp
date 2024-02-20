@@ -11,10 +11,14 @@ import CoreData
 protocol DataManagerProtocol {
     //users manage
     func getAllUsers(completion: @escaping (Result<[UsersModel], Error>) -> Void)
+    func getUserBy(email: String, completion: @escaping (State) -> Void)
     func editUser(_ user: UsersModel, completion: @escaping (Result<UsersModel, Error>) -> Void)
     func deleteUser(_ userId: Int, completion: @escaping (Result<UsersModel, Error>) -> Void)
+    func createUser(_ user: UsersModel, completion: @escaping (Result<UsersModel, Error>) -> Void)
+    
     //posts manage
     func getPostsBy(userId: Int, completion: @escaping (Result<[PostsModel], Error>) -> Void)
+    
     //comments manage
     func getCommentsBy(postId: Int, completion: @escaping (Result<[CommentsModel], Error>) -> Void)
     
@@ -33,9 +37,7 @@ final class DataManager: DataManagerProtocol {
     }
     
     //MARK: - Users
-    
     func getAllUsers(completion: @escaping (Result<[UsersModel], Error>) -> Void) {
-        
         coreData.getStorageUsers { [weak self] storageUsers in
             
             if storageUsers.isEmpty {
@@ -56,29 +58,58 @@ final class DataManager: DataManagerProtocol {
         }
     }
     
-    func editUser(_ user: UsersModel, completion: @escaping (Result<UsersModel, Error>) -> Void) {
-        coreData.update(user: user) { userEntity in
-            userEntity.email = user.email
-            userEntity.id = Int64(user.id)
-            userEntity.name = user.name
-            userEntity.username = user.username
+    func getUserBy(email: String, completion: @escaping (State) -> Void) {
+        coreData.getUserBy(email: email) { user in
+            if let user = user {
+                completion(.successUser(user))
+            } else {
+                let error = "User do not find!"
+                completion(.errorString(error))
+            }
         }
-        network.editingUser(user: user) { result in
+    }
+    
+    func createUser(_ user: UsersModel, completion: @escaping (Result<UsersModel, Error>) -> Void) {
+        network.createUser(user: user) { result in
             switch result {
-            case .success(let editedUser): completion(.success(editedUser))
-            case .failure(let error): completion(.failure(error))
+            case .success(let createdUser):
+                self.coreData.save(users: [createdUser]) {
+                    completion(.success(createdUser))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func editUser(_ user: UsersModel, completion: @escaping (Result<UsersModel, Error>) -> Void) {
+        
+        network.editUser(user: user) { result in
+            switch result {
+            case .success(let editedUser):
+                completion(.success(editedUser))
+                self.coreData.update(user: user) { userEntity in
+                    userEntity.email = user.email
+                    userEntity.id = Int64(user.id)
+                    userEntity.name = user.name
+                    userEntity.username = user.username
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }
     
     func deleteUser(_ userId: Int, completion: @escaping (Result<UsersModel, Error>) -> Void) {
-        coreData.deleteUser(byId: userId) {
-            print("success delete")
-        }
         network.deleteBy(userId: userId) { result in
             switch result {
-            case .success(let deletedUser): completion(.success(deletedUser))
-            case .failure(let error): completion(.failure(error))
+            case .success(let deletedUser):
+                completion(.success(deletedUser))
+                self.coreData.deleteUser(byId: userId) {
+                    print("success delete")
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }
@@ -86,11 +117,10 @@ final class DataManager: DataManagerProtocol {
     //MARK: - Posts
     
     func getPostsBy(userId: Int, completion: @escaping (Result<[PostsModel], Error>) -> Void) {
-        
         coreData.getStoragePosts(byUserId: userId) { storagePosts in
             
             if storagePosts.isEmpty {
-                self.network.getPostBy(userId: userId) { networkPosts in
+                self.network.getPostsBy(userId: userId) { networkPosts in
                     
                     switch networkPosts {
                     case .success(let posts):
@@ -110,7 +140,6 @@ final class DataManager: DataManagerProtocol {
     //MARK: - Comments
     
     func getCommentsBy(postId: Int, completion: @escaping (Result<[CommentsModel], Error>) -> Void) {
-        
         coreData.getStorageComments(byPostsId: postId) { storageComments in
             
             if storageComments.isEmpty {
