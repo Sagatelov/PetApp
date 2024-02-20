@@ -8,6 +8,4 @@
 </p>
 
 ## About
-
-A pet project is a project used to test various approaches in developing iOS applications, based on the JSON Placeholder API.
-
+A pet project is a project used to test various approaches in developing iOS applications. The application is designed to interact with the JSONPlaceholder test API, which provides fake JSON data for testing and prototyping. Users can browse, create, edit, and delete data provided through the API, such as posts, comments, users, and more.
