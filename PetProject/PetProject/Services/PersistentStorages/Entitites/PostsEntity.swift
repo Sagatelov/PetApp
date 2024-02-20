@@ -28,7 +28,7 @@ final class PostsEntity: NSManagedObject, FindEntities {
         let request = PostsEntity.fetchRequest()
         
         do {
-            if let findePostEntity = try PostsEntity.findEntity(byId: post.id,
+            if let findePostEntity = try PostsEntity.findEntitybyid(byId: post.id,
                                                                 context: context,
                                                                 request: request) {
                 return findePostEntity
@@ -37,7 +37,7 @@ final class PostsEntity: NSManagedObject, FindEntities {
                 
                 //create PostEntyty only if the UserEntity exist
                 let recuestUserEntity = UsersEntity.fetchRequest()
-                if let userEntity = try UsersEntity.findEntity(byId: post.userId,
+                if let userEntity = try UsersEntity.findEntitybyid(byId: post.userId,
                                                                context: context,
                                                                request: recuestUserEntity) {
                     let createPosts = PostsEntity(context: context)

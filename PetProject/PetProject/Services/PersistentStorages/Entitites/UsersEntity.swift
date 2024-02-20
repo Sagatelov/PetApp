@@ -27,7 +27,7 @@ final class UsersEntity: NSManagedObject, FindEntities {
         let request = UsersEntity.fetchRequest()
         
         do {
-            if let findeUserEntity = try findEntity(byId: user.id, 
+            if let findeUserEntity = try findEntitybyid(byId: user.id, 
                                                     context: context,
                                                     request: request) {
                 return findeUserEntity

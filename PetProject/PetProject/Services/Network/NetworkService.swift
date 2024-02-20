@@ -198,8 +198,4 @@ extension NetworkService: NetworkServiceProtocol {
         }.resume()
     }
     
-  
-    
 }
-
-

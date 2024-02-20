@@ -28,7 +28,7 @@ final class CommentsEntity: NSManagedObject, FindEntities {
         let request = CommentsEntity.fetchRequest()
         
         do {
-            if let findCommentsEntity = try CommentsEntity.findEntity(byId: comments.id,
+            if let findCommentsEntity = try CommentsEntity.findEntitybyid(byId: comments.id,
                                                                       context: context,
                                                                       request: request) {
                 return findCommentsEntity
@@ -36,7 +36,7 @@ final class CommentsEntity: NSManagedObject, FindEntities {
             } else {
                 
                 let requestPostsEntity = PostsEntity.fetchRequest()
-                if let postExist = try PostsEntity.findEntity(byId: comments.postId,
+                if let postExist = try PostsEntity.findEntitybyid(byId: comments.postId,
                                                               context: context,
                                                               request: requestPostsEntity) {
                     let createComment = CommentsEntity(context: context)
