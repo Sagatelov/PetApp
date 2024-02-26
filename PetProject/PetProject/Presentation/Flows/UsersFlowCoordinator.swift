@@ -8,21 +8,15 @@
 import Foundation
 import UIKit
 
-protocol MainFlowCoordinatorProtocol {
-    var navigation: UINavigationController { get }
-    var screenBuilder: ScreenBuilderProtocol { get }
-}
-
-protocol FlowUsersProtocol: MainFlowCoordinatorProtocol {
+protocol FlowUsersProtocol: MainCoordinatorProtocol {
     func edit(user: UsersModel)
     func showComments(by postsId: Int)
     func showPosts(by userId: Int)
-    func popToRoot()
 }
 
-typealias CoordinatorConfigProtocol = FlowUsersProtocol & InitialVCForFlowNavigatorProtocol
+typealias UserCoordinatorConfig = FlowUsersProtocol & InitialVCForFlowNavigatorProtocol
 
-final class UsersFlowCoordinator: CoordinatorConfigProtocol {
+final class UsersFlowCoordinator: UserCoordinatorConfig {
     
     var navigation: UINavigationController
     var screenBuilder: ScreenBuilderProtocol
@@ -32,8 +26,15 @@ final class UsersFlowCoordinator: CoordinatorConfigProtocol {
         navigation = UINavigationController()
     }
     
+    ///return initial view controller for MainFlowNavigator
+    func initController() -> UIViewController {
+        let usersList = screenBuilder.usersScreen(coordinator: self)
+        navigation.viewControllers = [usersList]
+        return navigation
+    }
+    
     func edit(user: UsersModel) {
-        let userEdite = screenBuilder.showEditUserScreen(user: user, coordinator: self)
+        let userEdite = screenBuilder.editUserScreen(user: user, coordinator: self)
         navigation.pushViewController(userEdite, animated: true)
     }
     
@@ -47,18 +48,6 @@ final class UsersFlowCoordinator: CoordinatorConfigProtocol {
         navigation.pushViewController(commentsList, animated: true)
     }
     
-    
-    func popToRoot() {
-    }
-    
-    
-    
-    ///return initial view controller for MainFlowNavigator
-    func initController() -> UIViewController {
-        let usersList = screenBuilder.initialUserList(coordinator: self)
-        navigation.viewControllers = [usersList]
-        return navigation
-    }
 }
 
 
