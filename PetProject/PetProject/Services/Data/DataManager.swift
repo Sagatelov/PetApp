@@ -9,17 +9,18 @@ import Foundation
 import CoreData
 
 protocol DataManagerProtocol {
-    //users manage
+    //Users manage
     func getAllUsers(completion: @escaping (Result<[UsersModel], Error>) -> Void)
     func getUserBy(email: String, completion: @escaping (State) -> Void)
     func editUser(_ user: UsersModel, completion: @escaping (Result<UsersModel, Error>) -> Void)
     func deleteUser(_ userId: Int, completion: @escaping (Result<UsersModel, Error>) -> Void)
     func createUser(_ user: UsersModel, completion: @escaping (Result<UsersModel, Error>) -> Void)
     
-    //posts manage
+    //Posts manage
     func getPostsBy(userId: Int, completion: @escaping (Result<[PostsModel], Error>) -> Void)
+    func getPosts(completion: @escaping ([PostsModel]) -> Void)
     
-    //comments manage
+    //Comments manage
     func getCommentsBy(postId: Int, completion: @escaping (Result<[CommentsModel], Error>) -> Void)
     
     init(network: NetworkServiceProtocol, coreData: CoreDataStorage)
@@ -28,8 +29,8 @@ protocol DataManagerProtocol {
 
 final class DataManager: DataManagerProtocol {
     
-    let network: NetworkServiceProtocol
-    let coreData: CoreDataStorage
+    private let network: NetworkServiceProtocol
+    private let coreData: CoreDataStorage
     
     required init(network: NetworkServiceProtocol, coreData: CoreDataStorage) {
         self.network = network
@@ -72,7 +73,9 @@ final class DataManager: DataManagerProtocol {
     func createUser(_ user: UsersModel, completion: @escaping (Result<UsersModel, Error>) -> Void) {
         network.createUser(user: user) { result in
             switch result {
-            case .success(let createdUser):
+            case .success(var createdUser):
+                ///We assign a new ID to the user and save it in the database. This is necessary to ensure the loading of created users when the application starts. We change the ID because a fake ID always comes from the server.
+                createdUser.id = UUID().hashValue
                 self.coreData.save(users: [createdUser]) {
                     completion(.success(createdUser))
                 }
@@ -83,7 +86,6 @@ final class DataManager: DataManagerProtocol {
     }
     
     func editUser(_ user: UsersModel, completion: @escaping (Result<UsersModel, Error>) -> Void) {
-        
         network.editUser(user: user) { result in
             switch result {
             case .success(let editedUser):
@@ -115,6 +117,11 @@ final class DataManager: DataManagerProtocol {
     }
     
     //MARK: - Posts
+    func getPosts(completion: @escaping ([PostsModel]) -> Void) {
+        coreData.getAllPosts { posts in
+            completion(posts)
+        }
+    }
     
     func getPostsBy(userId: Int, completion: @escaping (Result<[PostsModel], Error>) -> Void) {
         coreData.getStoragePosts(byUserId: userId) { storagePosts in
@@ -138,7 +145,6 @@ final class DataManager: DataManagerProtocol {
     }
     
     //MARK: - Comments
-    
     func getCommentsBy(postId: Int, completion: @escaping (Result<[CommentsModel], Error>) -> Void) {
         coreData.getStorageComments(byPostsId: postId) { storageComments in
             
@@ -153,7 +159,6 @@ final class DataManager: DataManagerProtocol {
                         completion(.failure(error))
                     }
                 }
-                
             } else {
                 completion(.success(storageComments))
             }

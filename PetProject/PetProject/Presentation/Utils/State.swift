@@ -7,7 +7,8 @@
 
 import Foundation
 
-enum State: Equatable {
+enum State {
     case successString(String)
     case errorString(String)
+    case successUser(UsersModel)
 }

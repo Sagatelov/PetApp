@@ -25,16 +25,16 @@
                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="kNf-xZ-iYv">
                     <rect key="frame" x="20" y="264.33333333333331" width="353" height="150"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="lu6-je-mT6">
-                            <rect key="frame" x="0.0" y="8" width="100" height="134"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="lu6-je-mT6">
+                            <rect key="frame" x="0.0" y="3.3333333333333712" width="111" height="143.33333333333334"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="558-v0-a1c">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="22.666666666666668"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="111" height="24"/>
                                     <attributedString key="attributedText">
                                         <fragment content="Name">
                                             <attributes>
                                                 <color key="NSColor" systemColor="opaqueSeparatorColor"/>
-                                                <font key="NSFont" size="20" name="Ubuntu-Regular"/>
+                                                <font key="NSFont" metaFont="system" size="20"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
@@ -42,12 +42,12 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="owM-fs-VUI">
-                                    <rect key="frame" x="0.0" y="55.666666666666679" width="100" height="22.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="59.000000000000007" width="111" height="25.333333333333336"/>
                                     <attributedString key="attributedText">
                                         <fragment content="User Name">
                                             <attributes>
                                                 <color key="NSColor" systemColor="opaqueSeparatorColor"/>
-                                                <font key="NSFont" size="20" name="Ubuntu-Regular"/>
+                                                <font key="NSFont" metaFont="system" size="21"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
@@ -55,12 +55,12 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFO-Yt-MgP">
-                                    <rect key="frame" x="0.0" y="111.33333333333337" width="100" height="22.666666666666657"/>
+                                    <rect key="frame" x="0.0" y="119.33333333333331" width="111" height="24"/>
                                     <attributedString key="attributedText">
                                         <fragment content="Email">
                                             <attributes>
                                                 <color key="NSColor" systemColor="opaqueSeparatorColor"/>
-                                                <font key="NSFont" size="20" name="Ubuntu-Regular"/>
+                                                <font key="NSFont" metaFont="system" size="20"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
@@ -69,14 +69,14 @@
                                 </label>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="width" constant="100" id="ndJ-XQ-UJc"/>
+                                <constraint firstAttribute="width" constant="111" id="ndJ-XQ-UJc"/>
                             </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="hH4-aE-chv">
-                            <rect key="frame" x="130" y="0.0" width="223" height="150"/>
+                            <rect key="frame" x="141" y="0.0" width="212" height="150"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Bk-Rw-dpI">
-                                    <rect key="frame" x="0.0" y="0.0" width="223" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="212" height="40"/>
                                     <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="kmi-ex-5fU"/>
@@ -85,7 +85,7 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tyr-gB-bJF">
-                                    <rect key="frame" x="0.0" y="55" width="223" height="40"/>
+                                    <rect key="frame" x="0.0" y="55" width="212" height="40"/>
                                     <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="Qcg-30-Trq"/>
@@ -94,7 +94,7 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gbR-jg-JEb">
-                                    <rect key="frame" x="0.0" y="110" width="223" height="40"/>
+                                    <rect key="frame" x="0.0" y="110" width="212" height="40"/>
                                     <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="M5L-de-mQe"/>
@@ -114,12 +114,12 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3x2-6a-7q5">
-                    <rect key="frame" x="20" y="151" width="288.66666666666669" height="58.333333333333343"/>
+                    <rect key="frame" x="20" y="151" width="269.66666666666669" height="58.333333333333343"/>
                     <attributedString key="attributedText">
-                        <fragment content="User edidting">
+                        <fragment content="User editing">
                             <attributes>
                                 <color key="NSColor" systemColor="systemGreenColor"/>
-                                <font key="NSFont" size="45" name="Nexa-Trial-Regular"/>
+                                <font key="NSFont" size="50" name="Big-Apple-3PM"/>
                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                             </attributes>
                         </fragment>
@@ -127,7 +127,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CsF-k8-OTR">
-                    <rect key="frame" x="172" y="450.66666666666669" width="49.333333333333343" height="22.666666666666686"/>
+                    <rect key="frame" x="172" y="450.66666666666669" width="49" height="23.333333333333314"/>
                     <attributedString key="attributedText">
                         <fragment content="Label">
                             <attributes>

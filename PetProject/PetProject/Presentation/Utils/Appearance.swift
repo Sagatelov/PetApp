@@ -11,7 +11,6 @@ import UIKit
         // MARK: Navigation bar appearance
         UINavigationBar.appearance().tintColor = .systemGray
         
-        
         // MARK: Tab bar appearance
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithOpaqueBackground()

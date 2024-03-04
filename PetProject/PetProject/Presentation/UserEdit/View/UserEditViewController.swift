@@ -18,7 +18,6 @@ class UserEditViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var validationLabel: UILabel!
     
-    @IBOutlet weak var test: UITextField!
     
     private var viewModel: UserEditViewModelPorotocol!
     private var updateBarButton: UIBarButtonItem!
@@ -48,8 +47,6 @@ class UserEditViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Private
-    
-    
     private func setTextField(_ fields: [UITextField]) {
         let font = UIFont(name: "Ubuntu-Regular", size: 16)
         fields.forEach {
@@ -110,13 +107,10 @@ class UserEditViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func editingResultAlert(_ state: State?) {
-        switch state {
-        case .successString(_):
-            alert(title: "Пользователь обновлен", messege: "Редактирование прошло успешно")
-        case .errorString(let error):
+        if case .successString((_)) = state {
+            alert(title: "Пользователь обновлен", messege: "Редактирование прошло успешно")}
+        if case .errorString(let error) = state {
             alert(title: "Ошибка редактирования", messege: error)
-        case .none:
-            break
         }
     }
     
@@ -126,7 +120,7 @@ class UserEditViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    //MARK: - logic for editing fields
+    //MARK: - Logic for editing fields
     
     private func handleEmailTextFieldValidation(_ textField: UITextField, _ range: NSRange, _ string: String) -> Bool {
         
@@ -134,7 +128,7 @@ class UserEditViewController: UIViewController, UITextFieldDelegate {
         
         let newString = text.replacingCharacters(in: range, with: string)
         
-        let isEmailvalidated = Validation.emailValidation(email: newString)
+        let isEmailvalidated = Validation.validation(type: .email, data: newString)
         
         if isEmailvalidated {
             updateBarButton.isEnabled = true
@@ -142,7 +136,7 @@ class UserEditViewController: UIViewController, UITextFieldDelegate {
         } else {
             updateBarButton.isEnabled = false
             validationLabel.isHidden = false
-            validationLabel.text = "Формат email должен быть \nyourname@example.com."
+            validationLabel.text = "Invalid email format. \nPlease use the format: \nyourname@example.com."
         }
         return true
     }

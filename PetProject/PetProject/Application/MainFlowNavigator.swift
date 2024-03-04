@@ -22,7 +22,6 @@ protocol MainFlowNavigatorProtocol {
 
 final class MainFlowNavigator: MainFlowNavigatorProtocol {
     
-    
     private var window: UIWindow
     var tabBar: UITabBarController
     var navigators: [InitialVCForFlowNavigatorProtocol]

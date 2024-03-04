@@ -7,61 +7,82 @@
 
 import UIKit
 
+protocol CellViewDataSource: AnyObject {
+    func configurLikeButton() -> LikeButtonForCell
+}
+
 class PostsTableViewCell: UITableViewCell {
 
-    var titleLable: UILabel!
-    var body: UILabel!
-
+    lazy private var titleLable: UILabel = setTitleLabel()
+    lazy private var body: UILabel = setBody()
+    lazy private var likeButton: LikeButtonForCell = setlikeButton()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    weak var delegate: CellViewDataSource?
+    
+    init(style: UITableViewCell.CellStyle, reuseIdentifier: String?, delegate: CellViewDataSource) {
+        self.delegate = delegate
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setLables()
+        setSelfConfig()
         setConstraints()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setLables()
+        setSelfConfig()
         setConstraints()
     }
     
-    func configCell(_ postData: PostsModel) {
+    func configCell(_ postData: PostsModel, isActive: Bool) {
         titleLable.text = postData.title
         body.text = postData.body
+        likeButton.setLikeButtonId(postData.id)
+        likeButton.isSelected = isActive
     }
     
-    private func setLables() {
-        let font = UIFont(name: "Ubuntu-Regular", size: 20)
-        
-        titleLable = UILabel()
+    private func setTitleLabel() -> UILabel {
+        let titleLable = UILabel()
+        titleLable.translatesAutoresizingMaskIntoConstraints = false
         titleLable.textColor = .systemGreen
         titleLable.textAlignment = .left
-        titleLable.translatesAutoresizingMaskIntoConstraints = false
-        titleLable.font = font
+        titleLable.font = UIFont(name: "Ubuntu-Regular", size: 20)
         titleLable.numberOfLines = 0
-        
-        body = UILabel()
+        return titleLable
+    }
+    
+    private func setBody() -> UILabel {
+        let body = UILabel()
+        body.translatesAutoresizingMaskIntoConstraints = false
         body.textColor = .systemGreen
         body.textAlignment = .left
-        body.translatesAutoresizingMaskIntoConstraints = false
-        body.font = font
+        body.font = UIFont(name: "Ubuntu-Regular", size: 20)
         body.numberOfLines = 0
-        
+        return body
+    }
+    
+    private func setlikeButton() -> LikeButtonForCell {
+        guard let delegate = delegate else { return LikeButtonForCell()}
+        return delegate.configurLikeButton()
+    }
+    
+    private func setSelfConfig() {
         self.backgroundColor = .darkGray
         self.selectionStyle = .none
-        self.addSubview(titleLable)
-        self.addSubview(body)
+        self.contentView.addSubviews([likeButton, titleLable, body])
     }
 
     private func setConstraints() {
-        titleLable.topAnchor.constraint(equalTo: self.topAnchor, constant: 40).isActive = true
-        titleLable.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40).isActive = true
-        titleLable.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -20).isActive = true
-        
-        body.trailingAnchor.constraint(equalTo: titleLable.trailingAnchor).isActive = true
-        body.topAnchor.constraint(equalTo: titleLable.bottomAnchor, constant: 20).isActive = true
-        body.leadingAnchor.constraint(equalTo: titleLable.leadingAnchor).isActive = true
-        body.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -40).isActive = true
-        
+        NSLayoutConstraint.activate([
+            titleLable.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 40),
+            titleLable.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 40),
+            titleLable.trailingAnchor.constraint(lessThanOrEqualTo: self.contentView.trailingAnchor, constant: -20),
+            
+            body.trailingAnchor.constraint(equalTo: titleLable.trailingAnchor),
+            body.topAnchor.constraint(equalTo: titleLable.bottomAnchor, constant: 20),
+            body.leadingAnchor.constraint(equalTo: titleLable.leadingAnchor),
+            body.bottomAnchor.constraint(equalTo: likeButton.topAnchor, constant: -20),
+            
+            likeButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -30),
+            likeButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -30)
+        ])
     }
 }

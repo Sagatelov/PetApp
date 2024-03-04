@@ -25,7 +25,6 @@ class AuthManager: AuthManagerProtocol {
         }
     }
     
-    
     func signIn(email: String, pass: String, completion: @escaping (_ success: Bool) -> Void) {
         Auth.auth().signIn(withEmail: email, password: pass) { (result, error) in
             if let error = error, let _ = AuthErrorCode.Code(rawValue: error._code) {

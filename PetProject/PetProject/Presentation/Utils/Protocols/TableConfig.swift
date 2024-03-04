@@ -10,12 +10,12 @@ import UIKit
 
 protocol TableConfig {}
 extension TableConfig where Self: UIViewController {
-    func config(table: UITableView, xibName: String, completion: (String) -> Void) -> Void {
+    func config(table: UITableView, xibFileName: String, completion: (String) -> Void) -> Void {
         
         table.dataSource = self as? UITableViewDataSource
         table.delegate = self as? UITableViewDelegate
-        let cell = xibName + "id"
-        let nib = UINib(nibName: xibName, bundle: nil)
+        let cell = xibFileName + "id"
+        let nib = UINib(nibName: xibFileName, bundle: nil)
         table.register(nib, forCellReuseIdentifier: cell)
         completion(cell)
     }

@@ -23,6 +23,7 @@ protocol ScreenBuilderProtocol {
     
     //MARK: Profile Flow
     func profileScreen(coordinator: ProfileCoordinatorConfig) -> ProfileViewController
+    func favoritesScreen(coordinator: ProfileCoordinatorConfig) -> FavoritesViewController
     
     //MARK: Services init
     init(network: NetworkServiceProtocol, coreDataStorage: CoreDataStorage, authManager: AuthManagerProtocol)

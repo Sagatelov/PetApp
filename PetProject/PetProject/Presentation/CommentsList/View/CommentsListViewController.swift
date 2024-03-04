@@ -21,9 +21,24 @@ class CommentsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navBarViews()
         commentsTableView = configTable()
         viewModel.viewDidLoad()
         bind(to: viewModel)
+    }
+    
+    private func navBarViews() {
+        title = "Comments"
+        let titleLargeFont = FontsHalper.setFonts(name: .bigApple3PM, size: 50)
+        let titleFont = FontsHalper.setFonts(name: .ubuntuRegular, size: 20)
+        
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: titleFont,
+            NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        
+        navigationController?.navigationBar.largeTitleTextAttributes = [
+            NSAttributedString.Key.font: titleLargeFont,
+            NSAttributedString.Key.foregroundColor: UIColor.systemGreen]
     }
     
     private func configTable() -> UITableView {
@@ -39,7 +54,7 @@ class CommentsListViewController: UIViewController {
         table.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         table.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         table.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-
+        
         return table
     }
     

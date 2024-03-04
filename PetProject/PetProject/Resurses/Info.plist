@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>UIAppFonts</key>
-    <array>
-        <string>Nexa-Trial-Regular.ttf</string>
-        <string>Ubuntu-Regular.ttf</string>
+	<array>
+		<string>Ubuntu-Regular.ttf</string>
+        <string>Big Apple 3PM.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

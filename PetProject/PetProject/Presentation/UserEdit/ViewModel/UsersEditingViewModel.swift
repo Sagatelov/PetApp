@@ -11,7 +11,7 @@ protocol EditViewModelOutput {
     var user: Observable<UsersModel>! { get }
     var state: Observable<State?> { get }
     var dataManager: DataManagerProtocol { get }
-    var flowCoordinator: CoordinatorConfigProtocol { get }
+    var flowCoordinator: UserCoordinatorConfig { get }
 }
 
 protocol EditViewModelInput {
@@ -27,10 +27,10 @@ final class UserEditViewModel: UserEditViewModelPorotocol {
     var state: Observable<State?> = Observable(.none)
     
     var dataManager: DataManagerProtocol
-    var flowCoordinator: CoordinatorConfigProtocol
+    var flowCoordinator: UserCoordinatorConfig
     
     //MARK: Init
-    init (user: UsersModel, dataManager: DataManagerProtocol, flowCoordinator: CoordinatorConfigProtocol) {
+    init (user: UsersModel, dataManager: DataManagerProtocol, flowCoordinator: UserCoordinatorConfig) {
         self.dataManager = dataManager
         self.flowCoordinator = flowCoordinator
         self.user = Observable(user)
@@ -38,8 +38,8 @@ final class UserEditViewModel: UserEditViewModelPorotocol {
     
     //MARK: Private
     
-    private func saveUserChange() {
-        dataManager.editUser(user.value) { result in
+    private func saveUserChange(_ user: UsersModel) {
+        dataManager.editUser(user) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let user): self.state.value = .successString("\(user.name)")
@@ -52,12 +52,11 @@ final class UserEditViewModel: UserEditViewModelPorotocol {
     //MARK: Input for view
     
     func editingUser(data: [String: String]) {
+        let newUserData = UsersModel(newName: data["name"] ?? "\(user.value.name)",
+                                     newNick: data["username"] ?? "\(user.value.username)",
+                                     newEmail: data["email"] ?? "\(user.value.email)")
         
-        user.value.name = data["name"] ?? "\(user.value.name)"
-        user.value.username = data["username"] ?? "\(user.value.username)"
-        user.value.email = data["email"] ?? "\(user.value.email)"
-        
-        saveUserChange()
+        saveUserChange(newUserData)
     }
     
 }

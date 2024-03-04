@@ -7,20 +7,19 @@
 
 import Foundation
 
-// MARK: Outputsa
+// MARK: Output
 protocol UsersViewModelOutput {
     var users: Observable<[UsersModel]> { get }
     var error: Observable<[Error]> { get }
     var alert: Observable<State?> { get }
     var dataManager: DataManagerProtocol { get }
-    var flowCoordinator: CoordinatorConfigProtocol { get }
+    var flowCoordinator: UserCoordinatorConfig { get }
 }
 
 // MARK: Input
 protocol UsersViewModelInput {
     func viewDidLoad()
     func deleteUserBy(id: Int)
-//    func create()
     func edit(user: UsersModel)
     func didTapOnUser(_ usersId: Int)
 }
@@ -33,16 +32,22 @@ final class UsersViewModel: UsersViewModelPorotocol {
     var error: Observable<[Error]> = Observable([])
     var users: Observable<[UsersModel]> = Observable([])
     
+    var sinupStatusViewModel: SignUpViewModelPorotocol!
     
     var dataManager: DataManagerProtocol
-    var flowCoordinator: CoordinatorConfigProtocol
+    var flowCoordinator: UserCoordinatorConfig
     
-    init(dataManager: DataManagerProtocol, flowCoordinator: CoordinatorConfigProtocol) {
+    init(dataManager: DataManagerProtocol, flowCoordinator: UserCoordinatorConfig) {
         self.dataManager = dataManager
         self.flowCoordinator = flowCoordinator
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handeleNewData(_:)),
+                                               name: .newUserDidReg, object: nil)
     }
     
-    
+    @objc private func handeleNewData(_ notification: Notification) {
+        loadUser()
+    }
     
     private func loadUser() {
         dataManager.getAllUsers { users in
@@ -56,9 +61,7 @@ final class UsersViewModel: UsersViewModelPorotocol {
         }
     }
     
-    
     //MARK: Input - view methods
-    
     func viewDidLoad() {
         loadUser()
     }
@@ -74,15 +77,12 @@ final class UsersViewModel: UsersViewModelPorotocol {
         }
     }
     
-//    func create() {
-//    }
-    
     func edit(user: UsersModel) {
         flowCoordinator.edit(user: user)
     }
     
     func didTapOnUser(_ usersId: Int) {
         flowCoordinator.showPosts(by: usersId)
+        
     }
-    
 }

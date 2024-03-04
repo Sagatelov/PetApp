@@ -13,7 +13,7 @@ protocol CommentsListViewModelInput {
     var comments: Observable<[CommentsModel]> { get }
     var error: Observable<[Error]> { get }
     var dataManager: DataManagerProtocol { get }
-    var flowCoordinator: CoordinatorConfigProtocol { get }
+    var flowCoordinator: UserCoordinatorConfig { get }
 }
 
 //MARK: Input
@@ -35,10 +35,10 @@ final class CommentsListViewModel: CommentsListViewModelPorotocol {
     var error: Observable<[Error]> = Observable([])
     
     var dataManager: DataManagerProtocol
-    var flowCoordinator: CoordinatorConfigProtocol
+    var flowCoordinator: UserCoordinatorConfig
     
     
-    init(postId: Int, dataManager: DataManagerProtocol, flowCoordinator: CoordinatorConfigProtocol) {
+    init(postId: Int, dataManager: DataManagerProtocol, flowCoordinator: UserCoordinatorConfig) {
         self.postId = Observable(postId)
         self.dataManager = dataManager
         self.flowCoordinator = flowCoordinator

@@ -9,36 +9,33 @@ import Foundation
 
 //MARK: Output
 protocol PostsListViewModelInput {
-    var userId: Observable<Int>! { get }
+    var userId: Observable<Int> { get }
     var error: Observable<[Error]> { get }
     var dataManager: DataManagerProtocol { get }
-    var flowCoordinator: CoordinatorConfigProtocol { get }
+    var flowCoordinator: UserCoordinatorConfig { get }
     var posts: Observable<[PostsModel]> { get }
 }
 
 //MARK: Input
 protocol PostsListViewModelOutput {
-    func edit(post: PostsModel)
     func didTapOnPosts(_ postsId: Int)
-    func createPost()
     func viewDidLoad()
+    func favoritesButtonDidTap(state: Bool, id: Int)
+    func favoritesLoadDataWith(id: Int) -> Bool
 }
 
 typealias PostsListViewModelPorotocol = PostsListViewModelInput & PostsListViewModelOutput
 
-
 final class PostsListViewModel: PostsListViewModelPorotocol {
     
-    
-    
     //MARK: Output
-    var userId: Observable<Int>!
+    var userId: Observable<Int>
     var posts: Observable<[PostsModel]> = Observable([])
     var error: Observable<[Error]> = Observable([])
     var dataManager: DataManagerProtocol
-    var flowCoordinator: CoordinatorConfigProtocol
+    var flowCoordinator: UserCoordinatorConfig
     
-    init(userId: Int, dataManager: DataManagerProtocol, flowCoordinator: CoordinatorConfigProtocol) {
+    init(userId: Int, dataManager: DataManagerProtocol, flowCoordinator: UserCoordinatorConfig) {
         self.userId = Observable(userId)
         self.dataManager = dataManager
         self.flowCoordinator = flowCoordinator
@@ -66,13 +63,13 @@ final class PostsListViewModel: PostsListViewModelPorotocol {
         flowCoordinator.showComments(by: postsId)
     }
     
-    func edit(post: PostsModel) {
-        
+    func favoritesButtonDidTap(state: Bool, id: Int) {
+        UserDefaultStorage.saveFavorites(isActive: state, idKey: id)
     }
     
-    func createPost() {
-        
+    func favoritesLoadDataWith(id: Int) -> Bool {
+        UserDefaultStorage.loadFavorites(idKey: id)
     }
-    
-    
 }
+
+

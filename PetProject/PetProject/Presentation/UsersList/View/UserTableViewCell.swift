@@ -30,7 +30,7 @@ class UserTableViewCell: UITableViewCell {
         lableThree.text = users.email
     }
     
-    func setColorStyle() {
+    private func setColorStyle() {
         backgroundColor = .darkGray
         selectionStyle = .none
     }

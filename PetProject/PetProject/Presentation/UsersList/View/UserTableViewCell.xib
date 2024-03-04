@@ -17,11 +17,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="346" height="160"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MBS-Qc-Umh">
-                        <rect key="frame" x="30.000000000000004" y="36" width="49.333333333333343" height="88"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MBS-Qc-Umh">
+                        <rect key="frame" x="31.000000000000004" y="35" width="49.333333333333343" height="90"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ItB-xi-trF">
-                                <rect key="frame" x="0.0" y="0.0" width="49.333333333333336" height="22.666666666666668"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ItB-xi-trF">
+                                <rect key="frame" x="0.0" y="0.0" width="49.333333333333336" height="24.666666666666668"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Label">
                                         <attributes>
@@ -34,11 +34,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kV1-xV-slR">
-                                <rect key="frame" x="0.0" y="32.666666666666671" width="49.333333333333336" height="22.666666666666671"/>
+                                <rect key="frame" x="0.0" y="34.666666666666671" width="49.333333333333336" height="22.666666666666671"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Label">
                                         <attributes>
-                                            <color key="NSColor" systemColor="systemGreenColor"/>
+                                            <color key="NSColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <font key="NSFont" size="20" name="Ubuntu-Regular"/>
                                             <font key="NSOriginalFont" size="20" name="MonotypeGurmukhi"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -48,11 +48,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7V-Fk-jw3">
-                                <rect key="frame" x="0.0" y="65.333333333333329" width="49.333333333333336" height="22.666666666666671"/>
+                                <rect key="frame" x="0.0" y="67.333333333333329" width="49.333333333333336" height="22.666666666666671"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Label">
                                         <attributes>
-                                            <color key="NSColor" systemColor="systemGreenColor"/>
+                                            <color key="NSColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <font key="NSFont" size="20" name="Ubuntu-Regular"/>
                                             <font key="NSOriginalFont" size="20" name="MonotypeGurmukhi"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -65,10 +65,10 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="MBS-Qc-Umh" secondAttribute="bottom" constant="36" id="b0L-mg-DFc"/>
-                    <constraint firstItem="MBS-Qc-Umh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="36" id="llh-mN-51A"/>
-                    <constraint firstItem="MBS-Qc-Umh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="ueK-dO-RJl"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MBS-Qc-Umh" secondAttribute="trailing" constant="20" id="uhV-k2-BVV"/>
+                    <constraint firstItem="MBS-Qc-Umh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="31" id="3UK-3Z-g3V"/>
+                    <constraint firstItem="MBS-Qc-Umh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="iIV-JV-647"/>
+                    <constraint firstAttribute="bottom" secondItem="MBS-Qc-Umh" secondAttribute="bottom" constant="35" id="iMa-HE-JDK"/>
+                    <constraint firstItem="MBS-Qc-Umh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="35" id="icw-8y-KTi"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

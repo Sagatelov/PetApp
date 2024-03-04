@@ -9,13 +9,13 @@ import Foundation
 
 struct UsersModel: Codable {
     var id: Int
-    var name: String
-    var username: String
-    var email: String
-    var address: UserAddressInfo?
-    var phone: String?
-    var website: String?
-    var company: UserCompanyInfo?
+    let name: String
+    let username: String
+    let email: String
+    let address: UserAddressInfo?
+    let phone: String?
+    let website: String?
+    let company: UserCompanyInfo?
     
     init(entity: UsersEntity) {
         self.id = Int(entity.id)
@@ -28,29 +28,37 @@ struct UsersModel: Codable {
         self.company = nil
     }
     
-    init(newUser name: String, username: String, email: String) {
+    init(newName name: String, newNick username: String, newEmail email: String) {
+        let geo = UserGeoInfo(lat: "", lng: "")
+        let address = UserAddressInfo(street: "", suite: "", city: "", zipcode: "", geo: geo)
+        let companyInfo = UserCompanyInfo(name: "", catchPhrase: "", bs: "")
+        
         self.id = 0
         self.name = name
         self.username = username
         self.email = email
+        self.address = address
+        self.phone = ""
+        self.website = ""
+        self.company = companyInfo
     }
 }
 
 struct UserAddressInfo: Codable {
-    var street: String
-    var suite: String
-    var city: String
-    var zipcode: String
-    var geo: UserGeoInfo
+    let street: String
+    let suite: String
+    let city: String
+    let zipcode: String
+    let geo: UserGeoInfo
 }
 
 struct UserGeoInfo: Codable {
-    var lat: String
-    var lng: String
+    let lat: String
+    let lng: String
 }
 
 struct UserCompanyInfo: Codable {
-    var name: String
-    var catchPhrase: String
-    var bs: String
+    let name: String
+    let catchPhrase: String
+    let bs: String
 }

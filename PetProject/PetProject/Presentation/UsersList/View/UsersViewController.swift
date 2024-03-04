@@ -22,31 +22,18 @@ class UsersViewController: UIViewController, TableConfig {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        config(table: usersListTableView,
+               xibFileName: "UserTableViewCell") { id in self.idCell = id }
         
-        config(table: usersListTableView, xibName: "UserTableViewCell") { id in
-            self.idCell = id
-        }
-        
-        setColorControllers()
+        tabBarViews()
+        navBarViews()
+        setViews()
         userViewModel.viewDidLoad()
         bind(to: userViewModel)
     }
     
-    private func setColorControllers() {
-        
-        view.backgroundColor = .darkGray
-        navigationController?.navigationBar.barTintColor = .darkGray
-        
-        navigationController?.tabBarController?.tabBar.barTintColor = .darkGray
-        navigationController?.tabBarController?.tabBar.tintColor = .systemGreen
-        navigationController?.tabBarController?.tabBar.unselectedItemTintColor = .systemGray
-        navigationController?.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
-        
-        usersListTableView.backgroundColor = .darkGray
-    }
-    
+    //MARK: Private method
     private func bind(to viewModel: UsersViewModelPorotocol) {
-        
         viewModel.users.observe(on: self) { [weak self] _ in
             self?.usersListTableView.reloadData() }
         viewModel.error.observe(on: self) { [weak self] error in
@@ -112,8 +99,8 @@ private extension UsersViewController {
     }
 }
 
+//MARK: Delegate
 extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         userViewModel.users.value.count
     }
@@ -126,21 +113,19 @@ extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
         let user = self.userViewModel.users.value[indexPath.row]
         let model = self.userViewModel
         
         let editeAction = UIContextualAction(style: .normal, title: "Edite") { action, view, completion in
-            
             model?.edit(user: user)
             completion(true)
         }
         
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, completion in
-            
             model?.deleteUserBy(id: user.id)
             completion(true)
         }
+        
         deleteAction.backgroundColor = #colorLiteral(red: 1, green: 0.2335082591, blue: 0.1885917783, alpha: 1)
         editeAction.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
         
@@ -151,7 +136,6 @@ extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let selectedUser = userViewModel.users.value[indexPath.row]
         userViewModel.didTapOnUser(selectedUser.id)
         
