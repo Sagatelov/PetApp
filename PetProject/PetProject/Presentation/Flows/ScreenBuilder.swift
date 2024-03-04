@@ -91,4 +91,10 @@ final class ScreenBuilder: ScreenBuilderProtocol {
         let controller = ProfileViewController.initProfileController(viewModel: viewModel)
         return controller
     }
+    
+    func favoritesScreen(coordinator: ProfileCoordinatorConfig) -> FavoritesViewController {
+        let viewModel = FavoritesViewModel(dataManager: dataManager, flowCoordinator: coordinator)
+        let conroller = FavoritesViewController.initFavoritesController(viewModel: viewModel)
+        return conroller
+    }
 }
