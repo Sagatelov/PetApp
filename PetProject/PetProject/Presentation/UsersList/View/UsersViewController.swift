@@ -77,6 +77,40 @@ class UsersViewController: UIViewController, TableConfig {
     }
 }
 
+//MARK: Confic Views
+private extension UsersViewController {
+    func navBarViews() {
+        let titleLargeFont = FontsHalper.setFonts(name: .bigApple3PM, size: 50)
+        let titleFont = FontsHalper.setFonts(name: .ubuntuRegular, size: 20)
+        
+        navigationController?.navigationBar.topItem?.title = "All users"
+        navigationController?.navigationBar.barTintColor = .darkGray
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: titleFont,
+            NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        
+        navigationController?.navigationBar.largeTitleTextAttributes = [
+            NSAttributedString.Key.font: titleLargeFont,
+            NSAttributedString.Key.foregroundColor: UIColor.systemGreen]
+    }
+    
+    func tabBarViews() {
+        tabBarController?.tabBar.barTintColor = .darkGray
+        tabBarController?.tabBar.tintColor = .systemGreen
+        tabBarController?.tabBar.unselectedItemTintColor = .systemGray
+        
+        let config = UIImage.SymbolConfiguration(pointSize: 20)
+        let image = UIImage(systemName: "list.bullet.circle.fill", withConfiguration: config)
+        tabBarItem = UITabBarItem(title: "Users", image: image, tag: 0)
+    }
+    
+    func setViews() {
+        view.backgroundColor = .darkGray
+        usersListTableView.backgroundColor = .darkGray
+    }
+}
 
 extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
     
